@@ -1,0 +1,29 @@
+server:
+  port: 5060
+  servlet:
+    context-path: /order
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka
+
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+
+spring:
+  application:
+    name: cloud-order
+  freemarker:
+    enabled: false
+  thymeleaf:
+    cache: false
+  datasource:
+    url: jdbc:postgresql://47.111.28.187:31432/ratel_order
+    username: postgres
+    password: postgres123!
+
+
+
+

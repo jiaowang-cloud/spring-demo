@@ -1,0 +1,32 @@
+server:
+  port: 5070
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka
+
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://47.111.28.187:31432/ratel
+
+zuul:
+  host:
+    socket-timeout-millis: 600000
+    connect-timeout-millis: 600000
+  routes:
+    cloud-order:
+      path: /order/**
+      serviceId: cloud-order
+      strip-prefix: false
+      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
+
+    cloud-user:
+      path: /user/**
+      serviceId: cloud-user
+      strip-prefix: false
+      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
