@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/saas/user")
 @RestController("userC")
 public class UserController {
-    @GetMapping("/{id}")
-    public String detail(@PathVariable("id") long id) throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id", id);
-        jsonObject.put("msg", "user 模块");
-        return jsonObject.toString();
-    }
+  @GetMapping("/{id}")
+  public String detail(@PathVariable("id") long id) throws JSONException {
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("id", id);
+    jsonObject.put("msg", "user 模块");
+    return jsonObject.toString();
+  }
 }
