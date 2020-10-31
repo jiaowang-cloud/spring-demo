@@ -12,7 +12,8 @@ eureka:
 
 spring:
   datasource:
-    url: jdbc:postgresql://47.111.28.187:31432/ratel
+    url: jdbc:mysql://localhost:3306/ratel?characterEncoding=utf8&generateSimpleParameterMetadata=true&connectTimeout=5000&useSSL=false
+
 
 zuul:
   host:
