@@ -1,4 +1,4 @@
-package yooo.yun.com.user;
+package yooo.yun.com.user.controller;
 
 import org.json.JSONException;
 import org.json.JSONObject;

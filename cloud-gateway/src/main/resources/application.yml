@@ -25,9 +25,13 @@ zuul:
       serviceId: cloud-order
       strip-prefix: false
       sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
+      ignoredPatterns: /order/test**
 
     cloud-user:
       path: /user/**
       serviceId: cloud-user
       strip-prefix: false
       sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
+      ignoredPatterns: /user/test**
+
+  white-pattern: /user/inner/**,/order/inner/**
