@@ -1,18 +1,28 @@
 package yooo.yun.com.filter;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
+import netscape.javascript.JSObject;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import yooo.yun.com.config.AppConfig;
+import yooo.yun.com.constant.Constant;
+import yooo.yun.com.utils.JWTUtil;
+import yooo.yun.com.utils.StringUtils;
 import yooo.yun.com.utils.UrlCheckUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.Objects;
 
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_DECORATION_FILTER_ORDER;
 
@@ -72,7 +82,9 @@ public class ZuulPreFilter extends ZuulFilter {
     response.setHeader("Access-Control-Allow-Methods", "*");
     response.setHeader("Access-Control-Allow-Credentials", "false");
     response.setContentType("application/json");
+    // servlet 使用UTF-8 而不是默认的
     response.setCharacterEncoding("UTF-8");
+    // 通过设置响应头控制浏览器以UTF-8的编码显示数据，让浏览器用utf8来解析返回的数据,如果不加这句话，那么浏览器显示的将是乱码
     response.setContentType("text/html;charset=UTF-8");
     if ("OPTIONS".equals(request.getMethod())) {
       requestContext.setSendZuulResponse(Boolean.FALSE);
@@ -86,6 +98,108 @@ public class ZuulPreFilter extends ZuulFilter {
       log.info("run:白名单url,跳过token校验[{}]", uri);
       return null;
     }
+
+    // 获取认证名称
+    log.info("run:[开始校验token]");
+    String token = request.getHeader("Authorization");
+    log.info("run:[Authorization:{}]", token);
+    boolean verified;
+    if (StringUtils.isEmpty(token)) {
+      log.info("run:[请求token为空]");
+      requestContext.setSendZuulResponse(Boolean.FALSE);
+      requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
+      requestContext.setResponseBody(JSON.toJSONString(getJsonObject()));
+      requestContext.getResponse().setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+      return null;
+    }
+    if (StringUtils.isNotEmpty(token)) {
+      // 用户请求时会在头部 Authorization 传给我之前存储的token, 我用来验证
+      token = token.replace("Bearer ", "");
+
+      // 校验token 正确性您没有该操作的权限
+      log.info("run:[开始校验token]");
+      verified = JWTUtil.verify(token);
+      if (verified) {
+        JWTUtil.TokenEntity tokenEntity;
+        tokenEntity = JWTUtil.getTokenEntity(token);
+        log.info("run:前端token数据[{}]", tokenEntity);
+        String redisToken = null;
+        if (JWTUtil.LoginTypeEnum.SAAS.getValue().equalsIgnoreCase(tokenEntity.getLoginType())) {
+          if (!checkSystem(uri, JWTUtil.LoginTypeEnum.SAAS)) {
+            String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
+            setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
+            return null;
+          }
+          if ((tokenEntity.getRole() != JWTUtil.Role.SUPER_ADMIN.getValue())
+              && (tokenEntity.getRole() != JWTUtil.Role.ADMIN.getValue())) {
+            log.info("run:[saas端权限不足]");
+            String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
+            setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
+            return null;
+          }
+          // TODO: 2020/11/12/012 redisToken获取redis中的token
+        } else if (JWTUtil.LoginTypeEnum.WORKBENCH
+            .getValue()
+            .equalsIgnoreCase(tokenEntity.getLoginType())) {
+          if (!checkSystem(uri, JWTUtil.LoginTypeEnum.WORKBENCH)) {
+            String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
+            setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
+            return null;
+          }
+          // TODO: 2020/11/12/012 redisToken获取redis中的token
+        }
+        // 校验前端传来的token与redis中存的是否一致
+        if (Objects.isNull(redisToken) || !token.equals(redisToken)) {
+          log.info("run:请求token和缓存中token不匹配[token:{},redisToken:{}]", token, redisToken);
+          requestContext.setSendZuulResponse(Boolean.FALSE);
+          requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
+          requestContext.setResponseBody(JSON.toJSONString(getJsonObject()));
+          requestContext.getResponse().setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+          return null;
+        }
+      }
+    }
     return null;
+  }
+
+  private JSONObject getJsonObject() {
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("code", "E1001");
+    jsonObject.put("msg", "凭证不能为空");
+    jsonObject.put("result", false);
+    jsonObject.put("data", null);
+    return jsonObject;
+  }
+
+  /**
+   * 检测系统是否隔离访问 1.ma 直接放行 2.系统生成token和请求携带token的系统一致 3.通用common请求放行
+   *
+   * @param uri the uri
+   * @param loginTypeEnum the login type enum
+   * @return boolean
+   */
+  private Boolean checkSystem(String uri, JWTUtil.LoginTypeEnum loginTypeEnum) {
+    String[] split = StringUtils.split(uri, "/");
+    if ("ma".equalsIgnoreCase(split[0])) {
+      return true;
+    }
+    return loginTypeEnum.getValue().equalsIgnoreCase(split[1])
+        || Constant.COMMON.equalsIgnoreCase(split[1]);
+  }
+
+  /**
+   * 设置头部
+   *
+   * @param requestContext the request context
+   * @param httpStatus the http status
+   * @param json the json
+   */
+  @SuppressWarnings("SameParameterValue")
+  private void setRequestContext(
+      RequestContext requestContext, HttpStatus httpStatus, String json) {
+    requestContext.setSendZuulResponse(Boolean.FALSE);
+    requestContext.setResponseStatusCode(httpStatus.value());
+    requestContext.setResponseBody(json);
+    requestContext.getResponse().setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
   }
 }

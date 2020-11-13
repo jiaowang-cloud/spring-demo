@@ -1,4 +1,4 @@
-package yooo.yun.com.test;
+package yooo.yun.com.user.test;
 
 import yooo.yun.com.user.pojo.UserPoJo;
 
