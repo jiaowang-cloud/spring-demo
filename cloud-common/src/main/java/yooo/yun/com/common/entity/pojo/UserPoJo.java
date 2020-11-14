@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import yooo.yun.com.common.entity.BaseEntity;
+import yooo.yun.com.common.entity.request.UserReq;
 
 /**
  * 用户表
@@ -40,5 +42,11 @@ public class UserPoJo extends BaseEntity {
 
   public static UserPoJo of() {
     return new UserPoJo();
+  }
+
+  public static UserPoJo of(UserReq req) {
+    UserPoJo poJo = UserPoJo.of();
+    BeanUtils.copyProperties(req, poJo);
+    return poJo;
   }
 }

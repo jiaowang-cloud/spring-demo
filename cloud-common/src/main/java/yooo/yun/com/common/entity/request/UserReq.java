@@ -21,6 +21,7 @@ import java.io.Serializable;
 @ApiModel("用户信息请求")
 public class UserReq implements Serializable {
   private static final long serialVersionUID = 1L;
+
   @NotBlank(message = "电话不能为空")
   @ApiModelProperty(value = "电话", example = "15675458912")
   private String tel;
@@ -28,6 +29,10 @@ public class UserReq implements Serializable {
   @NotBlank(message = "密码不能为空")
   @ApiModelProperty(value = "密码", example = "yyy23")
   private String password;
+
+  @NotBlank(message = "确认密码不能为空")
+  @ApiModelProperty(value = "确认密码", example = "yyy23")
+  private String rePassword;
 
   @ApiModelProperty(value = "用户头像", example = "http://test.jpg")
   private String avatar;

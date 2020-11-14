@@ -12,7 +12,7 @@ eureka:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/ratel?characterEncoding=utf8&generateSimpleParameterMetadata=true&connectTimeout=5000&useSSL=false
+    url: jdbc:mysql://localhost:3306/cloud_user?characterEncoding=utf8&generateSimpleParameterMetadata=true&connectTimeout=5000&useSSL=false
 
 
 zuul:
@@ -25,9 +25,13 @@ zuul:
       serviceId: cloud-order
       strip-prefix: false
       sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
+      ignoredPatterns: /order/test**
 
     cloud-user:
       path: /user/**
       serviceId: cloud-user
       strip-prefix: false
       sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
+      ignoredPatterns: /user/test**
+
+  white-pattern: /user/inner/**,/order/inner/**

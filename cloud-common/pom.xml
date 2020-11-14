@@ -10,6 +10,31 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>cloud-common</artifactId>
+    <properties>
+        <shiro.version>1.4.1</shiro.version>
+        <java-jwt.version>3.7.0</java-jwt.version>
+        <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
+    </properties>
+    <dependencies>
+        <!-- Shiro+JWT start -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+
+        <!--JWT(Json Web Token)登录支持-->
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>${nimbus-jose-jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${java-jwt.version}</version>
+        </dependency>
+    </dependencies>
 
     <!--    Spring Boot-->
     <dependencyManagement>

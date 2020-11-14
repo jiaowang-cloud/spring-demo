@@ -20,9 +20,9 @@ spring:
   thymeleaf:
     cache: false
   datasource:
-    url: jdbc:mysql://localhost:3306/tb_order?characterEncoding=utf8&generateSimpleParameterMetadata=true&connectTimeout=5000&useSSL=false
+    url: jdbc:mysql://localhost:3306/cloud_user?characterEncoding=utf8&generateSimpleParameterMetadata=true&connectTimeout=5000&useSSL=false
     username: admin
-    password: admin123!
+    password: root123
 
 
 
