@@ -28,7 +28,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, UserPoJo> imple
   @Override
   public int testE(int status) {
     int num = 0;
-    int res = status / num;
-    return res;
+    return status / num;
   }
 }

@@ -32,20 +32,10 @@ public enum ApiCode {
   SMS_NOT_RECHARGE(5200, "短信未充值"),
   SMS_QUANTITY_NOT_ENOUGH(5201, "短信余量不足"),
   /** 业务级Code: 6001 - 7000 */
-  THIS_TYPE_AWARD_NOT_EXIST(6001, "该类型活动不存在"),
-  CUSTOMER_NOT_EXIST(6002, "查询不到当前客户"),
-  AWARD_NOT_EXIST(6003, "该奖品不存在"),
-  AWARD_ENERGY_NOT_ENOUGH(6004, "该奖品助力值尚未达标"),
-  AWARD_OPEN_TIME_NOT_ENOUGH(6005, "该奖品开奖时间尚未达标"),
-  ALREADY_LUCK_DRAW(6006, "您已参加过抽奖"),
-  TASK_MAX_FREQUENCY(6007, "任务已达上限"),
-  TASK_NOT_BEGIN_ERROR(6008, "任务还未开始"),
-  TASK_SECRET_CODE_ERROR(6009, "暗号有误,请重新输入"),
-  CUSTOMER_INFO_ERROR(6010, "完善资料有误,请重新输入"),
-  TASK_COMPLETE_MATERIAL_ERROR(6011, "完善失败,请重试"),
-  Not_SHOP_ERROR(6012, "还未购买心仪的宝贝"),
-
-  USER_UNAUTHORIZED(7000, "未授权，请先授权再访问");
+  USER_UNAUTHORIZED(6001, "未授权，请先授权再访问"),
+  USER_TWO_PASSWORDS_INCONSISTENT(6002, "两次输入密码不一致"),
+  USER_ACCOUNT_REGISTERED(6003, "该账号已被注册"),
+  ;
   private final int code;
   private final String msg;
 

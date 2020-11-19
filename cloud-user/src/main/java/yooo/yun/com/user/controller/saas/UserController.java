@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import yooo.yun.com.common.api.ApiCode;
 import yooo.yun.com.common.api.ApiResult;
 import yooo.yun.com.common.entity.pojo.UserPoJo;
 import yooo.yun.com.common.entity.request.UserLoginReq;
@@ -35,12 +37,12 @@ public class UserController {
   @ApiOperation("注册")
   public ApiResult register(@Valid @RequestBody UserReq req) {
     log.info("register:[req:{}]", JSON.toJSONString(req));
-    if (Objects.equals(req.getPassword(), req.getRePassword())) {
-      return ApiResult.fail("两次输入密码不一致");
+    if (!Objects.equals(req.getPassword(), req.getRePassword())) {
+      return ApiResult.fail(ApiCode.USER_TWO_PASSWORDS_INCONSISTENT);
     }
     UserPoJo findUser = service.getByTel(req.getTel());
     if (Objects.nonNull(findUser)) {
-      return ApiResult.fail("该账号已被注册");
+      return ApiResult.fail(ApiCode.USER_ACCOUNT_REGISTERED);
     }
 
     // md5加密
@@ -64,16 +66,15 @@ public class UserController {
   }
 
   /**
-   * 用户登录
+   * test
    *
    * @param status status
    * @return res
    */
   @PostMapping("/test")
-  @ApiOperation("登录")
+  @ApiOperation("测试全局异常")
   public ApiResult testGlobalException(@RequestParam(value = "status") int status) {
     log.info("testGlobalException:[status:{}]", status);
-    service.testE(status);
-    return ApiResult.ok();
+    return ApiResult.ok(service.testE(status));
   }
 }

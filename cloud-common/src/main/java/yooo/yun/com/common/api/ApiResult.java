@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,107 +25,95 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 public class ApiResult implements Serializable {
-    /**
-     * 响应码: 状态码为200才算请求成功
-     */
-    private String errorCode;
+  /** 响应码: 状态码为200才算请求成功 */
+  private String errorCode;
 
-    /**
-     * 响应消息
-     */
-    private String errorMessage;
+  /** 响应消息 */
+  private String errorMessage;
 
-    /**
-     * 是否成功
-     */
-    private boolean success;
+  /** 是否成功 */
+  private boolean success;
 
-    /**
-     * 响应数据
-     */
-    private Object data;
+  /** 响应数据 */
+  private Object data;
 
-    /**
-     * 响应时间
-     */
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date time = new Date();
+  /** 响应时间 */
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  private Date time = new Date();
 
-    public ApiResult() {
+  public ApiResult() {}
 
+  public static ApiResult result(boolean flag) {
+    if (flag) {
+      return ok();
     }
+    return fail();
+  }
 
-    public static ApiResult result(boolean flag) {
-        if (flag) {
-            return ok();
-        }
-        return fail();
+  public static ApiResult result(ApiCode apiCode) {
+    return result(apiCode, null);
+  }
+
+  public static ApiResult result(ApiCode apiCode, Object data) {
+    return result(apiCode, null, data);
+  }
+
+  public static ApiResult result(ApiCode apiCode, String msg, Object data) {
+    String message = apiCode.getMsg();
+    if (StringUtils.isNotBlank(msg)) {
+      message = msg;
     }
+    return ApiResult.builder()
+        .errorCode(String.valueOf(apiCode.getCode()))
+        .errorMessage(message)
+        .data(data)
+        .success(true)
+        .time(new Date())
+        .build();
+  }
 
-    public static ApiResult result(ApiCode apiCode) {
-        return result(apiCode, null);
+  public static ApiResult ok() {
+    return ok(null);
+  }
+
+  public static ApiResult ok(Object data) {
+    return result(ApiCode.SUCCESS, data);
+  }
+
+  public static ApiResult ok(Object data, String msg) {
+    return result(ApiCode.SUCCESS, msg, data);
+  }
+
+  public static ApiResult okMap(String key, Object value) {
+    Map<String, Object> map = new HashMap<>();
+    map.put(key, value);
+    return ok(map);
+  }
+
+  public static ApiResult fail(ApiCode apiCode) {
+    return result(apiCode, null);
+  }
+
+  public static ApiResult fail(String msg) {
+    return result(ApiCode.FAIL, msg, null);
+  }
+
+  public static ApiResult fail(ApiCode apiCode, Object data) {
+    if (ApiCode.SUCCESS == apiCode) {
+      throw new RuntimeException("失败结果状态码不能为" + ApiCode.SUCCESS.getCode());
     }
+    return result(apiCode, data);
+  }
 
-    public static ApiResult result(ApiCode apiCode, Object data) {
-        return result(apiCode, null, data);
-    }
+  public static ApiResult fail(String key, Object value) {
+    Map<String, Object> map = new HashMap<>();
+    map.put(key, value);
+    return result(ApiCode.FAIL, map);
+  }
 
-    public static ApiResult result(ApiCode apiCode, String msg, Object data) {
-        String message = apiCode.getMsg();
-        if (StringUtils.isNotBlank(msg)) {
-            message = msg;
-        }
-        return ApiResult.builder()
-                .errorCode(String.valueOf(apiCode.getCode()))
-                .errorMessage(message)
-                .data(data)
-                .success(true)
-                .time(new Date())
-                .build();
-    }
-
-    public static ApiResult ok() {
-        return ok(null);
-    }
-
-    public static ApiResult ok(Object data) {
-        return result(ApiCode.SUCCESS, data);
-    }
-
-    public static ApiResult ok(Object data, String msg) {
-        return result(ApiCode.SUCCESS, msg, data);
-    }
-
-    public static ApiResult okMap(String key, Object value) {
-        Map<String, Object> map = new HashMap<>();
-        map.put(key, value);
-        return ok(map);
-    }
-
-    public static ApiResult fail(ApiCode apiCode) {
-        return result(apiCode, null);
-    }
-
-    public static ApiResult fail(String msg) {
-        return result(ApiCode.FAIL, msg, null);
-    }
-
-    public static ApiResult fail(ApiCode apiCode, Object data) {
-        if (ApiCode.SUCCESS == apiCode) {
-            throw new RuntimeException("失败结果状态码不能为" + ApiCode.SUCCESS.getCode());
-        }
-        return result(apiCode, data);
-
-    }
-
-    public static ApiResult fail(String key, Object value) {
-        Map<String, Object> map = new HashMap<>();
-        map.put(key, value);
-        return result(ApiCode.FAIL, map);
-    }
-
-    public static ApiResult fail() {
-        return fail(ApiCode.FAIL);
-    }
+  public static ApiResult fail() {
+    return fail(ApiCode.FAIL);
+  }
 }
