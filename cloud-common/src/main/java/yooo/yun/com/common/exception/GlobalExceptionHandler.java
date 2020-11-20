@@ -113,9 +113,7 @@ public class GlobalExceptionHandler {
     } else {
       errorCode = ApiCode.SPRING_BOOT_PLUS_EXCEPTION.getCode();
     }
-    return new ApiResult()
-        .setErrorCode(String.valueOf(errorCode))
-        .setErrorMessage(exception.getMessage());
+    return new ApiResult().setCode(errorCode).setMsg(exception.getMessage());
   }
 
   /**
@@ -129,8 +127,8 @@ public class GlobalExceptionHandler {
   public ApiResult authenticationExceptionHandler(AuthenticationException exception) {
     log.error("authenticationExceptionHandler:[exception:{}]", exception.getMessage());
     return new ApiResult()
-        .setErrorCode(String.valueOf(ApiCode.AUTHENTICATION_EXCEPTION.getCode()))
-        .setErrorMessage(exception.getMessage());
+        .setCode(ApiCode.AUTHENTICATION_EXCEPTION.getCode())
+        .setMsg(exception.getMessage());
   }
 
   /**
