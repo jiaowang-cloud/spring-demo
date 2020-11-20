@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * REST API 返回结果
@@ -44,6 +43,7 @@ public class ApiResult implements Serializable {
   private Date time;
 
   public ApiResult() {
+    this.success = true;
     this.msg = ApiCode.SUCCESS.getMsg();
     this.code = ApiCode.SUCCESS.getCode();
     this.time = new Date(System.currentTimeMillis());
@@ -75,21 +75,11 @@ public class ApiResult implements Serializable {
   }
 
   public static ApiResult of(final ApiCode resultCode) {
-    ApiResult commonResponse = ApiResult.of();
-    if (!Objects.isNull(resultCode)) {
-      commonResponse.setCode(resultCode.getCode());
-      commonResponse.setMsg(resultCode.getMsg());
-    }
-    return commonResponse;
+    return of(false, resultCode);
   }
 
   public static ApiResult of(final ApiCode resultCode, final Object data) {
-    ApiResult commonResponse = ApiResult.of();
-    if (!Objects.isNull(resultCode)) {
-      commonResponse.setCode(resultCode.getCode());
-      commonResponse.setMsg(resultCode.getMsg());
-      commonResponse.setSuccess(false);
-    }
+    ApiResult commonResponse = of(false, resultCode);
     commonResponse.setData(data);
     return commonResponse;
   }
@@ -110,11 +100,8 @@ public class ApiResult implements Serializable {
   }
 
   public static ApiResult of(final boolean result, final Object data, final ApiCode resultCode) {
-    ApiResult commonResponse = ApiResult.of();
-    commonResponse.setSuccess(result);
+    ApiResult commonResponse = of(result, resultCode);
     commonResponse.setData(data);
-    commonResponse.setMsg(resultCode.getMsg());
-    commonResponse.setCode(resultCode.getCode());
     return commonResponse;
   }
 
@@ -143,7 +130,7 @@ public class ApiResult implements Serializable {
   }
 
   public static ApiResult fail(final String msg) {
-    return of(false, msg);
+    return of(msg);
   }
 
   public static ApiResult fail(ApiCode apiCode, Object data) {

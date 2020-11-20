@@ -29,8 +29,6 @@ public enum ApiCode {
   UNAUTHORIZED_EXCEPTION(5106, "没有访问权限"),
   SQL_ERROR_EXCEPTION(5107, "SQL语法异常"),
   DATA_NOT_EXIST(5108, "记录不存在"),
-  SMS_NOT_RECHARGE(5200, "短信未充值"),
-  SMS_QUANTITY_NOT_ENOUGH(5201, "短信余量不足"),
   /** 业务级Code: 6001 - 7000 */
   USER_UNAUTHORIZED(6001, "未授权，请先授权再访问"),
   USER_TWO_PASSWORDS_INCONSISTENT(6002, "两次输入密码不一致"),

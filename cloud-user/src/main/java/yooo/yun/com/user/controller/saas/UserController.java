@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import yooo.yun.com.common.api.ApiCode;
 import yooo.yun.com.common.api.ApiResult;
 import yooo.yun.com.common.entity.pojo.UserPoJo;
@@ -76,5 +75,20 @@ public class UserController {
   public ApiResult testGlobalException(@RequestParam(value = "status") int status) {
     log.info("testGlobalException:[status:{}]", status);
     return ApiResult.ok(service.testE(status));
+  }
+
+  /**
+   * test
+   *
+   * @param status status
+   * @return res
+   */
+  @PostMapping("/test-api")
+  @ApiOperation("测试api返回结果类型")
+  public ApiResult testApiResult(@RequestParam(value = "status") int status) {
+    log.info("testApiResult:[status:{}]", status);
+    return Objects.equals(status, 1)
+        ? ApiResult.ok(status)
+        : ApiResult.fail(ApiCode.USER_ACCOUNT_REGISTERED);
   }
 }
