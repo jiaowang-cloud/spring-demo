@@ -35,7 +35,7 @@ public enum ApiCode {
   USER_ACCOUNT_REGISTERED(6003, "该账号已被注册"),
   ;
   private final int code;
-  private final String msg;
+  private String msg;
 
   ApiCode(final int code, final String msg) {
     this.code = code;
@@ -59,4 +59,9 @@ public enum ApiCode {
   public String getMsg() {
     return msg;
   }
+
+  public void setMsg(String msg) {
+    this.msg = msg;
+  }
+
 }
