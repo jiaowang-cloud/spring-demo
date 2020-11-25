@@ -33,6 +33,8 @@ public enum ApiCode {
   USER_UNAUTHORIZED(6001, "未授权，请先授权再访问"),
   USER_TWO_PASSWORDS_INCONSISTENT(6002, "两次输入密码不一致"),
   USER_ACCOUNT_REGISTERED(6003, "该账号已被注册"),
+  USER_ACCOUNT_NOT_EXIST(6004, "该账号不存在，请先注册"),
+  USER_PASSWORDS_ERROR(6005, "密码错误"),
   ;
   private final int code;
   private String msg;

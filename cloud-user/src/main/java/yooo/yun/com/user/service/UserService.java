@@ -1,5 +1,6 @@
 package yooo.yun.com.user.service;
 
+import yooo.yun.com.common.api.ApiCode;
 import yooo.yun.com.common.entity.pojo.UserPoJo;
 import yooo.yun.com.common.service.BaseService;
 
@@ -17,4 +18,13 @@ public interface UserService extends BaseService<UserPoJo> {
   UserPoJo getByTel(String tel);
 
   int testE(int status);
+
+  /**
+   * 登录
+   *
+   * @param findUser findUser
+   * @param loginType loginType
+   * @return token
+   */
+  String login(UserPoJo findUser, String loginType);
 }

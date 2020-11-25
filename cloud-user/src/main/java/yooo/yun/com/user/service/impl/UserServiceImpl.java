@@ -3,8 +3,10 @@ package yooo.yun.com.user.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import yooo.yun.com.common.entity.enums.UserRoleEnum;
 import yooo.yun.com.common.entity.pojo.UserPoJo;
 import yooo.yun.com.common.service.Impl.BaseServiceImpl;
+import yooo.yun.com.common.utils.JWTUtil;
 import yooo.yun.com.user.mapper.UserMapper;
 import yooo.yun.com.user.service.UserService;
 
@@ -29,5 +31,15 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, UserPoJo> imple
   public int testE(int status) {
     int num = 0;
     return status / num;
+  }
+
+  @Override
+  public String login(UserPoJo findUser, String loginType) {
+    // TODO: 2020/11/25/025 其他业务逻辑处理
+
+    String token =
+        JWTUtil.generateSaasToken(findUser.getId(), UserRoleEnum.ADMIN.getValue(), null, loginType);
+    log.info("login:[token:{}]", token);
+    return token;
   }
 }

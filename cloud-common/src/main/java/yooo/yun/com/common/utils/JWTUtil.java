@@ -1,4 +1,4 @@
-package yooo.yun.com.utils;
+package yooo.yun.com.common.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -44,6 +44,10 @@ public class JWTUtil {
     return token;
   }
 
+  public static String generateSaasToken(
+      final long userId, final Integer role, final String openId, final String loginType) {
+    return generateToken(userId, role, openId, loginType);
+  }
   /** 验证token */
   public static boolean verify(String token) {
     try {
@@ -122,12 +126,10 @@ public class JWTUtil {
 
   @AllArgsConstructor
   public enum Role {
-    /** 超级管理员. */
-    SUPER_ADMIN(1, "超级管理员"),
     /** 管理员. */
-    ADMIN(2, "管理员"),
+    ADMIN(1, "管理员"),
     /** 普通员工,不能登录saas后台 */
-    GENERAL_STAFF(3, "普通员工");
+    STAFF(2, "员工");
 
     @Getter private int value;
     @Getter private String desc;
@@ -138,8 +140,7 @@ public class JWTUtil {
 
     /** 三个端登录方式 */
     SAAS("saas", "saas端登录"),
-    WORKBENCH("workbench", "workbench登录"),
-    WXMALL("wxmall", "wxmall登录");
+    WX_MALL("wxmall", "wxmall登录");
 
     @Getter private String value;
     @Getter private String desc;

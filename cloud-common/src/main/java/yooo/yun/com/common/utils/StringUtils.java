@@ -1,4 +1,4 @@
-package yooo.yun.com.utils;
+package yooo.yun.com.common.utils;
 
 import org.apache.commons.lang.ArrayUtils;
 

@@ -5,24 +5,31 @@ import com.alibaba.fastjson.JSONObject;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import com.netflix.zuul.http.HttpServletRequestWrapper;
+import com.netflix.zuul.http.ServletInputStreamWrapper;
 import lombok.extern.slf4j.Slf4j;
-import netscape.javascript.JSObject;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StreamUtils;
+import yooo.yun.com.common.constant.Constant;
+import yooo.yun.com.common.constant.Constant.HeaderKey;
 import yooo.yun.com.config.AppConfig;
-import yooo.yun.com.constant.Constant;
-import yooo.yun.com.utils.JWTUtil;
-import yooo.yun.com.utils.StringUtils;
+import yooo.yun.com.common.utils.JWTUtil;
+import yooo.yun.com.common.utils.StringUtils;
 import yooo.yun.com.utils.UrlCheckUtil;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.Objects;
+import java.io.InputStream;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.function.Consumer;
 
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_DECORATION_FILTER_ORDER;
 
@@ -130,18 +137,17 @@ public class ZuulPreFilter extends ZuulFilter {
             setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
             return null;
           }
-          if ((tokenEntity.getRole() != JWTUtil.Role.SUPER_ADMIN.getValue())
-              && (tokenEntity.getRole() != JWTUtil.Role.ADMIN.getValue())) {
+          if ((tokenEntity.getRole() != JWTUtil.Role.ADMIN.getValue())) {
             log.info("run:[saas端权限不足]");
             String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
             setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
             return null;
           }
           // TODO: 2020/11/12/012 redisToken获取redis中的token
-        } else if (JWTUtil.LoginTypeEnum.WORKBENCH
+        } else if (JWTUtil.LoginTypeEnum.WX_MALL
             .getValue()
             .equalsIgnoreCase(tokenEntity.getLoginType())) {
-          if (!checkSystem(uri, JWTUtil.LoginTypeEnum.WORKBENCH)) {
+          if (!checkSystem(uri, JWTUtil.LoginTypeEnum.WX_MALL)) {
             String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
             setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
             return null;
@@ -149,17 +155,126 @@ public class ZuulPreFilter extends ZuulFilter {
           // TODO: 2020/11/12/012 redisToken获取redis中的token
         }
         // 校验前端传来的token与redis中存的是否一致
-        if (Objects.isNull(redisToken) || !token.equals(redisToken)) {
-          log.info("run:请求token和缓存中token不匹配[token:{},redisToken:{}]", token, redisToken);
-          requestContext.setSendZuulResponse(Boolean.FALSE);
-          requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
-          requestContext.setResponseBody(JSON.toJSONString(getJsonObject()));
-          requestContext.getResponse().setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+
+        //        if (Objects.isNull(redisToken) || !token.equals(redisToken)) {
+        //          log.info("run:请求token和缓存中token不匹配[token:{},redisToken:{}]", token, redisToken);
+        //          requestContext.setSendZuulResponse(Boolean.FALSE);
+        //          requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
+        //          requestContext.setResponseBody(JSON.toJSONString(getJsonObject()));
+        //
+        // requestContext.getResponse().setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+        //          return null;
+        //        }
+
+        // 校验token正确性,并写入token信息
+        // *******************开始拦截****************************
+        if (uri.contains("/user/") || uri.contains("/order")) {
+          if (Objects.isNull(tokenEntity.getUserId())) {
+
+            log.info("run:[内部服务访问,token检验没有userId,不能访问]");
+            requestContext.setSendZuulResponse(false);
+            requestContext.setResponseStatusCode(401);
+            requestContext.setResponseBody("{\"code\":401,\"msg\":\"没有userId访问受限！\"}");
+            requestContext.getResponse().setContentType("text/json;charset=UTF-8");
+            return null;
+
+          } else {
+            putParam(tokenEntity, requestContext);
+          }
+        } else {
+          // token失效了
+          log.info("run:[token 令牌失效]");
+          requestContext.setSendZuulResponse(false);
+          requestContext.setResponseStatusCode(401);
+          requestContext.setResponseBody("{\"code\":401,\"msg\":\"令牌失效,请重新登录！\"}");
+          requestContext.getResponse().setContentType("text/json;charset=UTF-8");
           return null;
         }
+      } else {
+        // token失效了
+        log.info("run:[token校验失败]");
+        requestContext.setSendZuulResponse(false);
+        requestContext.setResponseStatusCode(401);
+        requestContext.setResponseBody("{\"code\":401,\"msg\":\"token校验失败！\"}");
+        requestContext.getResponse().setContentType("text/json;charset=UTF-8");
+        return null;
       }
+      log.info("run:[校验token完毕]");
     }
     return null;
+  }
+
+  private void putParam(
+      final JWTUtil.TokenEntity tokenEntity, final RequestContext requestContext) {
+    final HttpServletRequest request = requestContext.getRequest();
+
+    final Map<String, List<String>> queryParams =
+        Optional.ofNullable(requestContext.getRequestQueryParams()).orElse(new HashMap<>(1));
+    JSONObject requestBody;
+    Object body = null;
+    // 是否写入requestBody
+    boolean postFormData =
+        Optional.ofNullable(request.getContentType())
+            .map(o -> o.contains(MediaType.MULTIPART_FORM_DATA_VALUE))
+            .orElse(false);
+    try {
+      body =
+          Optional.ofNullable(
+                  JSONObject.parse(
+                      URLDecoder.decode(
+                          StreamUtils.copyToString(
+                                  Optional.ofNullable(
+                                          (InputStream) requestContext.get("requestEntity"))
+                                      .orElse(request.getInputStream()),
+                                  StandardCharsets.UTF_8)
+                              .replace("%", "%25"),
+                          "UTF-8")))
+              .orElse(null);
+    } catch (Exception e) {
+      log.warn("run:[{}]", e.getMessage());
+      log.error(e.getMessage(), e);
+    }
+    requestContext.addZuulRequestHeader(
+        Constant.HeaderKey.ROLE, String.valueOf(tokenEntity.getRole()));
+    requestContext.addZuulRequestHeader(HeaderKey.USER_ID, String.valueOf(tokenEntity.getUserId()));
+    // 加入自定义参数
+
+    requestContext.setRequestQueryParams(queryParams);
+    final boolean putBody = !postFormData && (Objects.isNull(body) || body instanceof JSONObject);
+    if (putBody) {
+      requestBody = Optional.ofNullable(body).map(JSONObject.class::cast).orElse(new JSONObject());
+      requestBody.put(HeaderKey.ROLE, tokenEntity.getRole());
+      putIfAbsent(HeaderKey.USER_ID, tokenEntity.getUserId(), requestBody);
+      putIfAbsent(HeaderKey.OPEN_ID, tokenEntity.getOpenId(), requestBody);
+      byte[] requestEntityBytes = requestBody.toJSONString().getBytes(StandardCharsets.UTF_8);
+      requestContext.setRequest(
+          new HttpServletRequestWrapper(requestContext.getRequest()) {
+            @Override
+            public ServletInputStream getInputStream() {
+              return new ServletInputStreamWrapper(requestEntityBytes);
+            }
+
+            @Override
+            public int getContentLength() {
+              return requestEntityBytes.length;
+            }
+
+            @Override
+            public long getContentLengthLong() {
+              return requestEntityBytes.length;
+            }
+          });
+    }
+  }
+  /** 仅当{@code val}不为null时,执行put方法 */
+  private void putIfAbsent(final String key, final Object val, JSONObject requestBody) {
+    execIfAbsent(val, v -> requestBody.put(key, v));
+  }
+  /** 仅当参数不为null时,执行{@code consumer} */
+  private void execIfAbsent(final Object obj, Consumer<Object> consumer) {
+    if (Objects.nonNull(obj)) {
+      consumer.accept(obj);
+    }
   }
 
   private JSONObject getJsonObject() {

@@ -22,7 +22,7 @@ import yooo.yun.com.common.entity.request.UserReq;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("用户表")
-@TableName(value = "r_user")
+@TableName(value = "tb_user")
 public class UserPoJo extends BaseEntity {
 
   @ApiModelProperty(value = "电话", example = "15675458912")
