@@ -15,7 +15,7 @@ import java.util.Date;
 @Slf4j
 public class JWTUtil {
   /** 秘钥 */
-  private static final String SECRET_KEY = "54d54365-7765-6654-8hg4-8742ac59f654";
+  private static final String SECRET_KEY = "54d54365-5342-7643-5gf4-8743ac6426y7";
   /** token过期时间(单位：豪秒) */
   public static final long TOKEN_EXPIRE_TIME = 24 * 60 * 60 * 1000;
   //  public static final long TOKEN_EXPIRE_TIME = 3000; // token过期时间
@@ -51,6 +51,7 @@ public class JWTUtil {
   /** 验证token */
   public static boolean verify(String token) {
     try {
+      log.info("verify:[验证token start]");
       Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY); // 算法
       JWTVerifier verifier = JWT.require(algorithm).withIssuer(ISSUER).build();
       verifier.verify(token);
@@ -60,6 +61,11 @@ public class JWTUtil {
       log.error(e.getMessage(), e);
       return false;
     }
+  }
+
+  public static void main(String[] args) {
+    String token = generateToken(1, 1, null, "saas");
+    System.out.println(verify(token));
   }
 
   /** 从token获取访问类型 */

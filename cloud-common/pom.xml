@@ -12,7 +12,6 @@
     <artifactId>cloud-common</artifactId>
     <properties>
         <shiro.version>1.4.1</shiro.version>
-        <java-jwt.version>3.7.0</java-jwt.version>
         <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
     </properties>
@@ -35,11 +34,6 @@
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
             <version>${nimbus-jose-jwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.auth0</groupId>
-            <artifactId>java-jwt</artifactId>
-            <version>${java-jwt.version}</version>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>

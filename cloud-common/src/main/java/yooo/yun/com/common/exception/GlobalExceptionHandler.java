@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -166,9 +167,9 @@ public class GlobalExceptionHandler {
    * @param exception exception
    * @return res
    */
-  @ExceptionHandler(value = BadSqlGrammarException.class)
+  @ExceptionHandler({BadSqlGrammarException.class, DataIntegrityViolationException.class})
   @ResponseStatus(HttpStatus.OK)
-  public ApiResult badSqlGrammarException(BadSqlGrammarException exception) {
+  public ApiResult badSqlGrammarException(Exception exception) {
     log.info("badSqlGrammarException:[exception:{}]", exception.getMessage());
     return ApiResult.fail(ApiCode.SQL_ERROR_EXCEPTION);
   }
@@ -181,6 +182,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(value = Exception.class)
   @ResponseStatus(HttpStatus.OK)
   public ApiResult exceptionHandler(Exception exception) {
+    exception.printStackTrace();
     log.error("exceptionHandler:[exception:{}]", exception.getMessage());
     if (Objects.nonNull(exception.getMessage())) {
       return ApiResult.fail(exception.getMessage());

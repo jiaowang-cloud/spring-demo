@@ -15,7 +15,6 @@ import yooo.yun.com.user.service.UserService;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 /**
@@ -101,5 +100,18 @@ public class UserController {
     return Objects.equals(status, 1)
         ? ApiResult.ok(status)
         : ApiResult.fail(ApiCode.USER_ACCOUNT_REGISTERED);
+  }
+
+  /**
+   * 获取用户详情
+   *
+   * @param id id
+   * @return res
+   */
+  @PostMapping("/{id}")
+  @ApiOperation("获取用户详情")
+  public ApiResult detail(@PathVariable(value = "id") long id) {
+    log.info("detail:[id:{}]", id);
+    return ApiResult.ok(service.getById(id));
   }
 }

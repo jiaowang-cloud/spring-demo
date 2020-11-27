@@ -112,7 +112,7 @@ public class ZuulPreFilter extends ZuulFilter {
     log.info("run:[Authorization:{}]", token);
     boolean verified;
     if (StringUtils.isEmpty(token)) {
-      log.info("run:[请求token为空]");
+      log.warn("run:[请求token为空]");
       requestContext.setSendZuulResponse(Boolean.FALSE);
       requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
       requestContext.setResponseBody(JSON.toJSONString(getJsonObject()));
@@ -122,10 +122,11 @@ public class ZuulPreFilter extends ZuulFilter {
     if (StringUtils.isNotEmpty(token)) {
       // 用户请求时会在头部 Authorization 传给我之前存储的token, 我用来验证
       token = token.replace("Bearer ", "");
-
+      log.info("run:[Authorization:{}]", token);
       // 校验token 正确性您没有该操作的权限
       log.info("run:[开始校验token]");
       verified = JWTUtil.verify(token);
+      log.info("run:校验token end[verified:{}]",verified);
       if (verified) {
         JWTUtil.TokenEntity tokenEntity;
         tokenEntity = JWTUtil.getTokenEntity(token);
@@ -237,8 +238,14 @@ public class ZuulPreFilter extends ZuulFilter {
     requestContext.addZuulRequestHeader(
         Constant.HeaderKey.ROLE, String.valueOf(tokenEntity.getRole()));
     requestContext.addZuulRequestHeader(HeaderKey.USER_ID, String.valueOf(tokenEntity.getUserId()));
+    requestContext.addZuulRequestHeader(HeaderKey.OPEN_ID, String.valueOf(tokenEntity.getOpenId()));
     // 加入自定义参数
-
+    queryParams.put(
+        HeaderKey.ROLE, Collections.singletonList(String.valueOf(tokenEntity.getRole())));
+    queryParams.put(
+        HeaderKey.USER_ID, Collections.singletonList(String.valueOf(tokenEntity.getUserId())));
+    queryParams.put(
+        HeaderKey.OPEN_ID, Collections.singletonList(String.valueOf(tokenEntity.getOpenId())));
     requestContext.setRequestQueryParams(queryParams);
     final boolean putBody = !postFormData && (Objects.isNull(body) || body instanceof JSONObject);
     if (putBody) {
@@ -266,6 +273,7 @@ public class ZuulPreFilter extends ZuulFilter {
           });
     }
   }
+
   /** 仅当{@code val}不为null时,执行put方法 */
   private void putIfAbsent(final String key, final Object val, JSONObject requestBody) {
     execIfAbsent(val, v -> requestBody.put(key, v));
