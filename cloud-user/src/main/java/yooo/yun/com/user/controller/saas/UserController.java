@@ -116,13 +116,13 @@ public class UserController {
   }
 
   /**
-   * 获取用户详情
+   * 删除用户信息
    *
    * @param id id
    * @return res
    */
   @DeleteMapping("/delete/{id}")
-  @ApiOperation("获取用户详情")
+  @ApiOperation("删除用户信息")
   public ApiResult delete(@PathVariable(value = "id") long id) {
     log.info("delete:[id:{}]", id);
     return ApiResult.ok(service.removeById(id));
