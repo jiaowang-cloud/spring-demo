@@ -250,11 +250,11 @@ public class Constant {
    * @param customerId the customer id
    * @return the w xmall token key
    */
-  public static String getWXmallTokenKey(Long employeeId, Long customerId) {
+  public static String getMiNiTokenKey(Long employeeId, Long customerId) {
     log.info(
         " RedisKey.getWXmallTokenKey : [TokenKey:{}]",
-        "rice:token:" + LoginTypeEnum.WX_MALL.getValue() + ":" + employeeId + ":" + customerId);
-    return "rice:token:" + LoginTypeEnum.WX_MALL.getValue() + ":" + employeeId + ":" + customerId;
+        "rice:token:" + LoginTypeEnum.MI_NI.getValue() + ":" + employeeId + ":" + customerId);
+    return "rice:token:" + LoginTypeEnum.MI_NI.getValue() + ":" + employeeId + ":" + customerId;
   }
 
   /** 订单状态的过期时间 */

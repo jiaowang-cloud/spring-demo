@@ -12,7 +12,7 @@ public enum LoginTypeEnum {
 
   /** 三个端登录方式 */
   SAAS("saas", "saas端登录"),
-  WX_MALL("wxmall", "wxmall登录"),;
+  MI_NI("mini", "mini登录"),;
 
   @Getter private String value;
   @Getter private String desc;

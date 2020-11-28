@@ -108,10 +108,23 @@ public class UserController {
    * @param id id
    * @return res
    */
-  @PostMapping("/{id}")
+  @GetMapping("/{id}")
   @ApiOperation("获取用户详情")
   public ApiResult detail(@PathVariable(value = "id") long id) {
     log.info("detail:[id:{}]", id);
     return ApiResult.ok(service.getById(id));
+  }
+
+  /**
+   * 获取用户详情
+   *
+   * @param id id
+   * @return res
+   */
+  @DeleteMapping("/delete/{id}")
+  @ApiOperation("获取用户详情")
+  public ApiResult delete(@PathVariable(value = "id") long id) {
+    log.info("delete:[id:{}]", id);
+    return ApiResult.ok(service.removeById(id));
   }
 }

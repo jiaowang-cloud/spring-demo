@@ -145,10 +145,10 @@ public class ZuulPreFilter extends ZuulFilter {
             return null;
           }
           // TODO: 2020/11/12/012 redisToken获取redis中的token
-        } else if (JWTUtil.LoginTypeEnum.WX_MALL
+        } else if (JWTUtil.LoginTypeEnum.MI_NI
             .getValue()
             .equalsIgnoreCase(tokenEntity.getLoginType())) {
-          if (!checkSystem(uri, JWTUtil.LoginTypeEnum.WX_MALL)) {
+          if (!checkSystem(uri, JWTUtil.LoginTypeEnum.MI_NI)) {
             String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
             setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
             return null;
