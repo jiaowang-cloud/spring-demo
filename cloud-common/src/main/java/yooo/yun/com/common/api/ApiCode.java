@@ -35,6 +35,7 @@ public enum ApiCode {
   USER_ACCOUNT_REGISTERED(6003, "该账号已被注册"),
   USER_ACCOUNT_NOT_EXIST(6004, "该账号不存在，请先注册"),
   USER_PASSWORDS_ERROR(6005, "密码错误"),
+  DATA_NOT_EXIST_FAILED_DELETE(6006, "数据不存在，删除失败"),
   ;
   private final int code;
   private String msg;
