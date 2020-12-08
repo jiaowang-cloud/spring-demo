@@ -1,4 +1,4 @@
-package yooo.yun.com.common.entity.pojo;
+package yooo.yun.com.common.entity.pojo.user;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;

@@ -2,7 +2,7 @@ package yooo.yun.com.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
-import yooo.yun.com.common.entity.pojo.UserPoJo;
+import yooo.yun.com.common.entity.pojo.user.UserPoJo;
 
 /**
  * @author WangJiao

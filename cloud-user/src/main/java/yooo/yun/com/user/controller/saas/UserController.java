@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import yooo.yun.com.common.api.ApiCode;
 import yooo.yun.com.common.api.ApiResult;
 import yooo.yun.com.common.entity.enums.LoginTypeEnum;
-import yooo.yun.com.common.entity.pojo.UserPoJo;
+import yooo.yun.com.common.entity.pojo.user.UserPoJo;
 import yooo.yun.com.common.entity.request.UserLoginReq;
 import yooo.yun.com.common.entity.request.UserReq;
 import yooo.yun.com.user.service.UserService;

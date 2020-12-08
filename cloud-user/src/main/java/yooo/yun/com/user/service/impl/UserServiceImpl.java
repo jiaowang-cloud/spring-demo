@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import yooo.yun.com.common.entity.enums.UserRoleEnum;
-import yooo.yun.com.common.entity.pojo.UserPoJo;
+import yooo.yun.com.common.entity.pojo.user.UserPoJo;
 import yooo.yun.com.common.service.Impl.BaseServiceImpl;
 import yooo.yun.com.common.utils.JWTUtil;
 import yooo.yun.com.user.mapper.UserMapper;
