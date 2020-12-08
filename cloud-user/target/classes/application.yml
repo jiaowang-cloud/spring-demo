@@ -11,7 +11,7 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
-
+############################### mysql start #################################
 spring:
   application:
     name: cloud-user
@@ -23,7 +23,7 @@ spring:
     url: jdbc:mysql://localhost:3306/cloud_user?characterEncoding=utf8&generateSimpleParameterMetadata=true&connectTimeout=5000&useSSL=false
     username: root
     password: root123
-
+############################### mysql end #################################
 # logback.xml中有详细的日志配置
 logging:
   config: classpath:logback.xml

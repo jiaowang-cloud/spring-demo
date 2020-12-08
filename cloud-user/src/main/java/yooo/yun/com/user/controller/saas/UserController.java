@@ -49,7 +49,8 @@ public class UserController {
 
     // md5加密
     req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
-    boolean res = service.save(UserPoJo.of(req));
+    // boolean res = service.save(UserPoJo.of(req));
+    boolean res =  service.saveUser(UserPoJo.of(req));
     log.info("register:[res:{}]", res);
     return ApiResult.ok(res);
   }

@@ -26,4 +26,6 @@ public interface UserService extends BaseService<UserPoJo> {
    * @return token
    */
   String login(UserPoJo findUser, String loginType);
+
+    boolean saveUser(UserPoJo of);
 }

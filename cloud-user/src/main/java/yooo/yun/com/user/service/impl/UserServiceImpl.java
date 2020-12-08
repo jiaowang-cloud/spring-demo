@@ -3,8 +3,10 @@ package yooo.yun.com.user.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import yooo.yun.com.common.entity.enums.UserRoleEnum;
 import yooo.yun.com.common.entity.pojo.user.UserPoJo;
+import yooo.yun.com.common.exception.BusinessException;
 import yooo.yun.com.common.service.Impl.BaseServiceImpl;
 import yooo.yun.com.common.utils.JWTUtil;
 import yooo.yun.com.user.mapper.UserMapper;
@@ -41,5 +43,13 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, UserPoJo> imple
         JWTUtil.generateSaasToken(findUser.getId(), UserRoleEnum.ADMIN.getValue(), null, loginType);
     log.info("login:[token:{}]", token);
     return token;
+  }
+
+  @Transactional(rollbackFor = Exception.class)
+  @Override
+  public boolean saveUser(UserPoJo of) {
+    boolean save = this.save(of);
+    log.info("saveUser:[save:{}]", save);
+    return save;
   }
 }
