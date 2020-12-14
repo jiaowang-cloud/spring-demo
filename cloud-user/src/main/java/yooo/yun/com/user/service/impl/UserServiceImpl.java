@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import yooo.yun.com.common.entity.enums.UserRoleEnum;
 import yooo.yun.com.common.entity.pojo.user.UserPoJo;
-import yooo.yun.com.common.exception.BusinessException;
 import yooo.yun.com.common.service.Impl.BaseServiceImpl;
 import yooo.yun.com.common.utils.JWTUtil;
 import yooo.yun.com.user.mapper.UserMapper;

@@ -81,18 +81,10 @@ public class ZuulPreFilter extends ZuulFilter {
     RequestContext requestContext = RequestContext.getCurrentContext();
     HttpServletRequest request = requestContext.getRequest();
     log.info("run:[method:{},url:{}]", request.getMethod(), request.getRequestURL());
-    HttpServletResponse response = requestContext.getResponse();
-    String allowHeaders =
-        "Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With, Authorization";
-    response.addHeader("Access-Control-Allow-Headers", allowHeaders);
-    response.addHeader("Access-Control-Allow-Origin", "*");
-    response.setHeader("Access-Control-Allow-Methods", "*");
-    response.setHeader("Access-Control-Allow-Credentials", "false");
-    response.setContentType("application/json");
-    // servlet 使用UTF-8 而不是默认的
-    response.setCharacterEncoding("UTF-8");
-    // 通过设置响应头控制浏览器以UTF-8的编码显示数据，让浏览器用utf8来解析返回的数据,如果不加这句话，那么浏览器显示的将是乱码
-    response.setContentType("text/html;charset=UTF-8");
+
+    // 设置HttpServletRequest返回参数格式
+    setHttpServletResponse(requestContext);
+
     if ("OPTIONS".equals(request.getMethod())) {
       requestContext.setSendZuulResponse(Boolean.FALSE);
       requestContext.setResponseStatusCode(HttpStatus.NO_CONTENT.value());
@@ -174,7 +166,7 @@ public class ZuulPreFilter extends ZuulFilter {
 
             log.info("run:[内部服务访问,token检验没有userId,不能访问]");
             requestContext.setSendZuulResponse(false);
-            requestContext.setResponseStatusCode(401);
+            requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
             requestContext.setResponseBody("{\"code\":401,\"msg\":\"没有userId访问受限！\"}");
             requestContext.getResponse().setContentType("text/json;charset=UTF-8");
             return null;
@@ -186,7 +178,7 @@ public class ZuulPreFilter extends ZuulFilter {
           // token失效了
           log.info("run:[token 令牌失效]");
           requestContext.setSendZuulResponse(false);
-          requestContext.setResponseStatusCode(401);
+          requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
           requestContext.setResponseBody("{\"code\":401,\"msg\":\"令牌失效,请重新登录！\"}");
           requestContext.getResponse().setContentType("text/json;charset=UTF-8");
           return null;
@@ -195,7 +187,7 @@ public class ZuulPreFilter extends ZuulFilter {
         // token失效了
         log.info("run:[token校验失败]");
         requestContext.setSendZuulResponse(false);
-        requestContext.setResponseStatusCode(401);
+        requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
         requestContext.setResponseBody("{\"code\":401,\"msg\":\"token校验失败！\"}");
         requestContext.getResponse().setContentType("text/json;charset=UTF-8");
         return null;
@@ -203,6 +195,21 @@ public class ZuulPreFilter extends ZuulFilter {
       log.info("run:[校验token完毕]");
     }
     return null;
+  }
+
+  private void setHttpServletResponse(RequestContext requestContext) {
+    HttpServletResponse response = requestContext.getResponse();
+    String allowHeaders =
+        "Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With, Authorization";
+    response.addHeader("Access-Control-Allow-Headers", allowHeaders);
+    response.addHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Methods", "*");
+    response.setHeader("Access-Control-Allow-Credentials", "false");
+    response.setContentType("application/json");
+    // servlet 使用UTF-8 而不是默认的
+    response.setCharacterEncoding("UTF-8");
+    // 通过设置响应头控制浏览器以UTF-8的编码显示数据，让浏览器用utf8来解析返回的数据,如果不加这句话，那么浏览器显示的将是乱码
+    response.setContentType("text/html;charset=UTF-8");
   }
 
   private void putParam(

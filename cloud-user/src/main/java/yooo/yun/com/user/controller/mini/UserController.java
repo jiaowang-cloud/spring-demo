@@ -46,7 +46,7 @@ public class UserController {
         DigestUtils.md5DigestAsHex(req.getPassword().getBytes()), findUser.getPassword())) {
       return ApiResult.fail(ApiCode.USER_PASSWORDS_ERROR);
     }
-    return ApiResult.ok(service.login(findUser, LoginTypeEnum.SAAS.getValue()));
+    return ApiResult.ok(service.login(findUser, LoginTypeEnum.MI_NI.getValue()));
   }
 
   /**

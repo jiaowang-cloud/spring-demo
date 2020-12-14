@@ -18,12 +18,6 @@ public class AuthProvider {
   // 过滤全匹配
   private static List<String> whiteUrl = new ArrayList<>();
 
-  private static List<String> openapiDomain = new ArrayList<>();
-
-  static {
-    openapiDomain.add("openapi.yooofuncloud.net");
-  }
-
   static {
     defaultSkipUrl.add("/error/**");
     defaultSkipUrl.add("/assets/**");
@@ -45,6 +39,7 @@ public class AuthProvider {
     // 登录注册相关
     whiteUrl.add("/user/saas/user/register"); // 用户注册
     whiteUrl.add("/user/saas/user/login"); // 用户登录
+    whiteUrl.add("/user/mini/user/login"); // 用户登录
   }
 
   /** 默认无需鉴权的API */
@@ -54,10 +49,5 @@ public class AuthProvider {
   /** 白名单API */
   public static List<String> getWhiteUrl() {
     return whiteUrl;
-  }
-
-  /** OPENAPI */
-  public static List<String> getOpenapiDomain() {
-    return openapiDomain;
   }
 }
