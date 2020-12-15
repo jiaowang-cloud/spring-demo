@@ -39,7 +39,7 @@ public class AuthProvider {
     // 登录注册相关
     whiteUrl.add("/user/saas/user/register"); // 用户注册
     whiteUrl.add("/user/saas/user/login"); // 用户登录
-    whiteUrl.add("/user/mini/user/login"); // 用户登录
+    whiteUrl.add("/user/mini/user/auth-token"); // 用户认证
   }
 
   /** 默认无需鉴权的API */

@@ -7,6 +7,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import yooo.yun.com.common.api.ApiCode;
 import yooo.yun.com.common.api.ApiResult;
+import yooo.yun.com.common.constant.Constant;
 import yooo.yun.com.common.entity.enums.LoginTypeEnum;
 import yooo.yun.com.common.entity.pojo.user.UserPoJo;
 import yooo.yun.com.common.entity.request.UserLoginReq;
@@ -20,7 +21,7 @@ import java.util.Objects;
 
 /**
  * @author WangJiao
- * @since 2020/10/14
+ * @since 2020/12/15
  */
 @Slf4j
 @RequestMapping(value = "/mini/user")
@@ -35,10 +36,10 @@ public class UserController {
    * @param req req
    * @return res
    */
-  @PostMapping("/login")
-  @ApiOperation("登录")
-  public ApiResult login(@Valid @RequestBody UserLoginReq req) {
-    log.info("login:[req:{}]", req);
+  @PostMapping("/auth-token")
+  @ApiOperation("认证接口")
+  public ApiResult authToken(@Valid @RequestBody UserLoginReq req) {
+    log.info("authToken:[req:{}]", req);
     String tel = req.getTel();
     UserPoJo findUser = service.getByTel(tel);
     if (Objects.isNull(findUser)) {
@@ -60,25 +61,12 @@ public class UserController {
    */
   @GetMapping("/detail")
   @ApiOperation("获取用户详情")
-  public ApiResult detail(@RequestParam(value = "openId") String openId) {
+  public ApiResult detail(@RequestParam(Constant.HeaderKey.OPEN_ID) String openId) {
     log.info("detail:[openId:{}]", openId);
     UserPoJo findUser = service.getByOpenId(openId);
 
     return Objects.nonNull(findUser)
         ? ApiResult.ok(UserResponse.of(findUser))
         : ApiResult.fail(ApiCode.USER_UNAUTHORIZED);
-  }
-
-  /**
-   * 删除用户信息
-   *
-   * @param id id
-   * @return res
-   */
-  @DeleteMapping("/delete/{id}")
-  @ApiOperation("删除用户信息")
-  public ApiResult delete(@PathVariable(value = "id") long id) {
-    log.info("delete:[id:{}]", id);
-    return ApiResult.ok(service.removeById(id));
   }
 }

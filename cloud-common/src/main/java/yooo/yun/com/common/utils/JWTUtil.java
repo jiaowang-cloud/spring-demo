@@ -49,7 +49,7 @@ public class JWTUtil {
       final long userId, final Integer role, final String openId, final String loginType) {
     return generateToken(userId, role, openId, loginType);
   }
-  /** 验证token */
+  /** 验证token是否合法 */
   public static boolean verify(String token) {
     try {
       log.info("verify:[验证token start]");

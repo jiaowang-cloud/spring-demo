@@ -126,13 +126,13 @@ public class ZuulPreFilter extends ZuulFilter {
       String redisToken = null;
       if (JWTUtil.LoginTypeEnum.SAAS.getValue().equalsIgnoreCase(tokenEntity.getLoginType())) {
         if (!checkSystem(uri, JWTUtil.LoginTypeEnum.SAAS)) {
-          String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
+          String json = JSON.toJSONString(getJsonNoPermissions());
           setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
           return null;
         }
         if ((tokenEntity.getRole() != JWTUtil.Role.ADMIN.getValue())) {
           log.info("run:[saas端权限不足]");
-          String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
+          String json = JSON.toJSONString(getJsonNoPermissions());
           setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
           return null;
         }
@@ -141,7 +141,7 @@ public class ZuulPreFilter extends ZuulFilter {
           .getValue()
           .equalsIgnoreCase(tokenEntity.getLoginType())) {
         if (!checkSystem(uri, JWTUtil.LoginTypeEnum.MI_NI)) {
-          String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
+          String json = JSON.toJSONString(getJsonNoPermissions());
           setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
           return null;
         }
@@ -284,7 +284,16 @@ public class ZuulPreFilter extends ZuulFilter {
   private JSONObject getJsonObject() {
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("code", "E1001");
-    jsonObject.put("msg", "凭证不能为空");
+    jsonObject.put("msg", "认证凭证不能为空");
+    jsonObject.put("result", false);
+    jsonObject.put("data", null);
+    return jsonObject;
+  }
+
+  private JSONObject getJsonNoPermissions() {
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("code", "403");
+    jsonObject.put("msg", "权限不足，请联系管理员！");
     jsonObject.put("result", false);
     jsonObject.put("data", null);
     return jsonObject;

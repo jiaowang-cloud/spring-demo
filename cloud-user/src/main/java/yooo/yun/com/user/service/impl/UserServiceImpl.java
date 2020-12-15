@@ -56,7 +56,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, UserPoJo> imple
   @Override
   public String loginMiNi(UserPoJo findUser, String loginType, String openId) {
     findUser.setOpenId(openId);
-    this.saveUser(findUser);
+    this.updateById(findUser);
     String token =
         JWTUtil.generateSaasToken(
             findUser.getId(), UserRoleEnum.ADMIN.getValue(), openId, loginType);
