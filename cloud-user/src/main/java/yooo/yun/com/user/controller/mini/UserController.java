@@ -10,6 +10,8 @@ import yooo.yun.com.common.api.ApiResult;
 import yooo.yun.com.common.entity.enums.LoginTypeEnum;
 import yooo.yun.com.common.entity.pojo.user.UserPoJo;
 import yooo.yun.com.common.entity.request.UserLoginReq;
+import yooo.yun.com.common.entity.response.UserResponse;
+import yooo.yun.com.common.utils.UUIDUtil;
 import yooo.yun.com.user.service.UserService;
 
 import javax.annotation.Resource;
@@ -46,20 +48,25 @@ public class UserController {
         DigestUtils.md5DigestAsHex(req.getPassword().getBytes()), findUser.getPassword())) {
       return ApiResult.fail(ApiCode.USER_PASSWORDS_ERROR);
     }
-    return ApiResult.ok(service.login(findUser, LoginTypeEnum.MI_NI.getValue()));
+    String openId = UUIDUtil.getUUID(15);
+    return ApiResult.ok(service.loginMiNi(findUser, LoginTypeEnum.MI_NI.getValue(), openId));
   }
 
   /**
    * 获取用户详情
    *
-   * @param id id
+   * @param openId openId
    * @return res
    */
-  @GetMapping("/{id}")
+  @GetMapping("/detail")
   @ApiOperation("获取用户详情")
-  public ApiResult detail(@PathVariable(value = "id") long id) {
-    log.info("detail:[id:{}]", id);
-    return ApiResult.ok(service.getById(id));
+  public ApiResult detail(@RequestParam(value = "openId") String openId) {
+    log.info("detail:[openId:{}]", openId);
+    UserPoJo findUser = service.getByOpenId(openId);
+
+    return Objects.nonNull(findUser)
+        ? ApiResult.ok(UserResponse.of(findUser))
+        : ApiResult.fail(ApiCode.USER_UNAUTHORIZED);
   }
 
   /**

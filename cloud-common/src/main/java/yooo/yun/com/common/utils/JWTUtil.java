@@ -25,7 +25,7 @@ public class JWTUtil {
   private static String generateToken(
       final long userId, final Integer role, final String openId, final String loginType) {
     Date now = new Date();
-    // 算法
+    // 算法HMAC256
     Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
     String token =
         JWT.create()
@@ -39,6 +39,7 @@ public class JWTUtil {
             .withClaim("userId", userId)
             .withClaim("openId", openId)
             .withClaim("loginType", loginType)
+            // 签名算法HMAC256
             .sign(algorithm);
     log.info("generateToken: 生成的token为 [{}]", token);
     return token;
@@ -65,7 +66,7 @@ public class JWTUtil {
 
   public static void main(String[] args) {
     String token = generateToken(1, 1, null, "saas");
-    System.out.println(verify(token));
+    log.info("main:[verify:{}]", verify(token));
   }
 
   /** 从token获取访问类型 */
@@ -124,9 +125,16 @@ public class JWTUtil {
     /** {@link LoginTypeEnum} */
     private String loginType;
 
+    /** 角色 */
     private Integer role;
+
+    /** 用户ID */
     private Long userId;
+
+    /** token验证true：验证成功，false:验证失败 */
     private boolean verified;
+
+    /** 迷你端登录openId */
     private String openId;
   }
 

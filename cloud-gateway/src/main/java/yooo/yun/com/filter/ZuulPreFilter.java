@@ -111,89 +111,78 @@ public class ZuulPreFilter extends ZuulFilter {
       requestContext.getResponse().setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
       return null;
     }
-    if (StringUtils.isNotEmpty(token)) {
-      // 用户请求时会在头部 Authorization 传给我之前存储的token, 我用来验证
-      token = token.replace("Bearer ", "");
-      log.info("run:[Authorization:{}]", token);
-      // 校验token 正确性您没有该操作的权限
-      log.info("run:[开始校验token]");
-      verified = JWTUtil.verify(token);
-      log.info("run:校验token end[verified:{}]",verified);
-      if (verified) {
-        JWTUtil.TokenEntity tokenEntity;
-        tokenEntity = JWTUtil.getTokenEntity(token);
-        log.info("run:前端token数据[{}]", tokenEntity);
-        String redisToken = null;
-        if (JWTUtil.LoginTypeEnum.SAAS.getValue().equalsIgnoreCase(tokenEntity.getLoginType())) {
-          if (!checkSystem(uri, JWTUtil.LoginTypeEnum.SAAS)) {
-            String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
-            setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
-            return null;
-          }
-          if ((tokenEntity.getRole() != JWTUtil.Role.ADMIN.getValue())) {
-            log.info("run:[saas端权限不足]");
-            String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
-            setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
-            return null;
-          }
-          // TODO: 2020/11/12/012 redisToken获取redis中的token
-        } else if (JWTUtil.LoginTypeEnum.MI_NI
-            .getValue()
-            .equalsIgnoreCase(tokenEntity.getLoginType())) {
-          if (!checkSystem(uri, JWTUtil.LoginTypeEnum.MI_NI)) {
-            String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
-            setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
-            return null;
-          }
-          // TODO: 2020/11/12/012 redisToken获取redis中的token
+
+    // 用户请求时会在头部 Authorization 传给我之前存储的token, 我用来验证
+    token = token.replace("Bearer ", "");
+    log.info("run:[Authorization:{}]", token);
+    // 校验token 正确性您没有该操作的权限
+    log.info("run:[开始校验token]");
+    verified = JWTUtil.verify(token);
+    log.info("run:校验token end[verified:{}]", verified);
+    if (verified) {
+      JWTUtil.TokenEntity tokenEntity;
+      tokenEntity = JWTUtil.getTokenEntity(token);
+      log.info("run:前端token数据[{}]", tokenEntity);
+      String redisToken = null;
+      if (JWTUtil.LoginTypeEnum.SAAS.getValue().equalsIgnoreCase(tokenEntity.getLoginType())) {
+        if (!checkSystem(uri, JWTUtil.LoginTypeEnum.SAAS)) {
+          String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
+          setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
+          return null;
         }
-        // 校验前端传来的token与redis中存的是否一致
+        if ((tokenEntity.getRole() != JWTUtil.Role.ADMIN.getValue())) {
+          log.info("run:[saas端权限不足]");
+          String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
+          setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
+          return null;
+        }
+        // TODO: 2020/11/12/012 redisToken获取redis中的token
+      } else if (JWTUtil.LoginTypeEnum.MI_NI
+          .getValue()
+          .equalsIgnoreCase(tokenEntity.getLoginType())) {
+        if (!checkSystem(uri, JWTUtil.LoginTypeEnum.MI_NI)) {
+          String json = "{\"code\":403,\"msg\":\"权限不足，请联系管理员！\"}";
+          setRequestContext(requestContext, HttpStatus.FORBIDDEN, json);
+          return null;
+        }
+        // TODO: 2020/11/12/012 redisToken获取redis中的token
+      }
+      // 校验前端传来的token与redis中存的是否一致
 
-        //        if (Objects.isNull(redisToken) || !token.equals(redisToken)) {
-        //          log.info("run:请求token和缓存中token不匹配[token:{},redisToken:{}]", token, redisToken);
-        //          requestContext.setSendZuulResponse(Boolean.FALSE);
-        //          requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
-        //          requestContext.setResponseBody(JSON.toJSONString(getJsonObject()));
-        //
-        // requestContext.getResponse().setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        //          return null;
-        //        }
+      // 校验token正确性,并写入token信息
+      // *******************开始拦截****************************
+      if (uri.contains("/user/") || uri.contains("/order")) {
+        if (Objects.isNull(tokenEntity.getUserId())) {
 
-        // 校验token正确性,并写入token信息
-        // *******************开始拦截****************************
-        if (uri.contains("/user/") || uri.contains("/order")) {
-          if (Objects.isNull(tokenEntity.getUserId())) {
-
-            log.info("run:[内部服务访问,token检验没有userId,不能访问]");
-            requestContext.setSendZuulResponse(false);
-            requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
-            requestContext.setResponseBody("{\"code\":401,\"msg\":\"没有userId访问受限！\"}");
-            requestContext.getResponse().setContentType("text/json;charset=UTF-8");
-            return null;
-
-          } else {
-            putParam(tokenEntity, requestContext);
-          }
-        } else {
-          // token失效了
-          log.info("run:[token 令牌失效]");
+          log.info("run:[内部服务访问,token检验没有userId,不能访问]");
           requestContext.setSendZuulResponse(false);
           requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
-          requestContext.setResponseBody("{\"code\":401,\"msg\":\"令牌失效,请重新登录！\"}");
+          requestContext.setResponseBody("{\"code\":401,\"msg\":\"没有userId访问受限！\"}");
           requestContext.getResponse().setContentType("text/json;charset=UTF-8");
           return null;
+
+        } else {
+          putParam(tokenEntity, requestContext);
         }
       } else {
         // token失效了
-        log.info("run:[token校验失败]");
+        log.info("run:[token 令牌失效]");
         requestContext.setSendZuulResponse(false);
         requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
-        requestContext.setResponseBody("{\"code\":401,\"msg\":\"token校验失败！\"}");
+        requestContext.setResponseBody("{\"code\":401,\"msg\":\"令牌失效,请重新登录！\"}");
         requestContext.getResponse().setContentType("text/json;charset=UTF-8");
         return null;
       }
-      log.info("run:[校验token完毕]");
+    } else {
+      // token失效了
+      log.info("run:[token校验失败]");
+      requestContext.setSendZuulResponse(false);
+      requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
+      requestContext.setResponseBody("{\"code\":401,\"msg\":\"token校验失败！\"}");
+      requestContext.getResponse().setContentType("text/json;charset=UTF-8");
+      return null;
     }
+    log.info("run:[校验token完毕]");
     return null;
   }
 

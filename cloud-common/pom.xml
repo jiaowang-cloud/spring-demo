@@ -35,6 +35,7 @@
             <artifactId>nimbus-jose-jwt</artifactId>
             <version>${nimbus-jose-jwt.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>

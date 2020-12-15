@@ -1,5 +1,6 @@
 package yooo.yun.com.user.service;
 
+import yooo.yun.com.common.api.ApiCode;
 import yooo.yun.com.common.entity.pojo.user.UserPoJo;
 import yooo.yun.com.common.service.BaseService;
 
@@ -23,9 +24,28 @@ public interface UserService extends BaseService<UserPoJo> {
    *
    * @param findUser findUser
    * @param loginType loginType
+   * @param openId openId
    * @return token
    */
-  String login(UserPoJo findUser, String loginType);
+  String login(UserPoJo findUser, String loginType, String openId);
 
-    boolean saveUser(UserPoJo of);
+  boolean saveUser(UserPoJo of);
+
+  /**
+   * mini端登录
+   *
+   * @param findUser findUser
+   * @param value value
+   * @param openId openId
+   * @return token
+   */
+  String loginMiNi(UserPoJo findUser, String value, String openId);
+
+  /**
+   * query by openId
+   *
+   * @param openId openId
+   * @return user
+   */
+  UserPoJo getByOpenId(String openId);
 }

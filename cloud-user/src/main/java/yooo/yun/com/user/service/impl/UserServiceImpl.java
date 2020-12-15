@@ -35,7 +35,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, UserPoJo> imple
   }
 
   @Override
-  public String login(UserPoJo findUser, String loginType) {
+  public String login(UserPoJo findUser, String loginType, String openId) {
     // TODO: 2020/11/25/025 其他业务逻辑处理
 
     String token =
@@ -50,5 +50,22 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, UserPoJo> imple
     boolean save = this.save(of);
     log.info("saveUser:[save:{}]", save);
     return save;
+  }
+
+  @Transactional(rollbackFor = Exception.class)
+  @Override
+  public String loginMiNi(UserPoJo findUser, String loginType, String openId) {
+    findUser.setOpenId(openId);
+    this.saveUser(findUser);
+    String token =
+        JWTUtil.generateSaasToken(
+            findUser.getId(), UserRoleEnum.ADMIN.getValue(), openId, loginType);
+    log.info("loginMiNi:[token:{}]", token);
+    return token;
+  }
+
+  @Override
+  public UserPoJo getByOpenId(String openId) {
+    return mapper.selectOne(Wrappers.<UserPoJo>lambdaQuery().eq(UserPoJo::getOpenId, openId));
   }
 }

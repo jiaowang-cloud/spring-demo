@@ -1,6 +1,5 @@
-package yooo.yun.com.common.entity.pojo.user;
+package yooo.yun.com.common.entity.response;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -8,8 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import yooo.yun.com.common.entity.BaseEntity;
-import yooo.yun.com.common.entity.request.UserReq;
+import yooo.yun.com.common.entity.BaseEntityResponse;
+import yooo.yun.com.common.entity.pojo.user.UserPoJo;
 
 /**
  * 用户表
@@ -21,15 +20,11 @@ import yooo.yun.com.common.entity.request.UserReq;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel("用户表")
-@TableName(value = "tb_user")
-public class UserPoJo extends BaseEntity {
+@ApiModel("用户信息Response")
+public class UserResponse extends BaseEntityResponse {
 
   @ApiModelProperty(value = "电话", example = "15675458912")
   private String tel;
-
-  @ApiModelProperty(value = "密码", example = "yyy23")
-  private String password;
 
   @ApiModelProperty(value = "用户头像", example = "http://test.jpg")
   private String avatar;
@@ -40,16 +35,13 @@ public class UserPoJo extends BaseEntity {
   @ApiModelProperty(value = "账号状态1：正常，2：停用", example = "1")
   private Integer status;
 
-  @ApiModelProperty(value = "openId", example = "3465555fa555345555ert6774df")
-  private String openId;
-
-  public static UserPoJo of() {
-    return new UserPoJo();
+  public static UserResponse of() {
+    return new UserResponse();
   }
 
-  public static UserPoJo of(UserReq req) {
-    UserPoJo poJo = UserPoJo.of();
-    BeanUtils.copyProperties(req, poJo);
-    return poJo;
+  public static UserResponse of(UserPoJo poJo) {
+    UserResponse response = UserResponse.of();
+    BeanUtils.copyProperties(poJo, response);
+    return response;
   }
 }

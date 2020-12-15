@@ -50,7 +50,7 @@ public class UserController {
     // md5加密
     req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
     // boolean res = service.save(UserPoJo.of(req));
-    boolean res =  service.saveUser(UserPoJo.of(req));
+    boolean res = service.saveUser(UserPoJo.of(req));
     log.info("register:[res:{}]", res);
     return ApiResult.ok(res);
   }
@@ -74,7 +74,7 @@ public class UserController {
         DigestUtils.md5DigestAsHex(req.getPassword().getBytes()), findUser.getPassword())) {
       return ApiResult.fail(ApiCode.USER_PASSWORDS_ERROR);
     }
-    return ApiResult.ok(service.login(findUser, LoginTypeEnum.SAAS.getValue()));
+    return ApiResult.ok(service.login(findUser, LoginTypeEnum.SAAS.getValue(), null));
   }
 
   /**
