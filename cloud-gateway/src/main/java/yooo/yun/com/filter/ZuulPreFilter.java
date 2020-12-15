@@ -178,7 +178,7 @@ public class ZuulPreFilter extends ZuulFilter {
       log.info("run:[token校验失败]");
       requestContext.setSendZuulResponse(false);
       requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
-      requestContext.setResponseBody("{\"code\":401,\"msg\":\"token校验失败！\"}");
+      requestContext.setResponseBody("{\"code\":401,\"msg\":\"token校验失败！或失效,请重新登录！\"}");
       requestContext.getResponse().setContentType("text/json;charset=UTF-8");
       return null;
     }

@@ -29,6 +29,7 @@ public enum ApiCode {
   UNAUTHORIZED_EXCEPTION(5106, "没有访问权限"),
   SQL_ERROR_EXCEPTION(5107, "SQL语法异常"),
   DATA_NOT_EXIST(5108, "记录不存在"),
+  TOKEN_HAS_EXPIRED(5109, "授权Token已失效，请重新授权"),
   /** 业务级Code: 6001 - 7000 */
   USER_UNAUTHORIZED(6001, "未授权，请先授权再访问"),
   USER_TWO_PASSWORDS_INCONSISTENT(6002, "两次输入密码不一致"),

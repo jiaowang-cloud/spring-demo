@@ -1,6 +1,7 @@
 package yooo.yun.com.common.exception;
 
 import com.alibaba.fastjson.JSON;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.UnauthenticatedException;
@@ -146,6 +147,20 @@ public class GlobalExceptionHandler {
   public ApiResult unauthenticatedExceptionHandler(UnauthenticatedException exception) {
     log.error("unauthenticatedExceptionHandler:[exception:{}]", exception.getMessage());
     return ApiResult.fail(ApiCode.UNAUTHENTICATED_EXCEPTION);
+  }
+
+
+  /**
+   * token失效
+   *
+   * @param exception exception
+   * @return res
+   */
+  @ExceptionHandler(value = TokenExpiredException.class)
+  @ResponseStatus(HttpStatus.OK)
+  public ApiResult TokenExpiredExceptionHandler(TokenExpiredException exception) {
+    log.error("TokenExpiredExceptionHandler:[exception:{}]", exception.getMessage());
+    return ApiResult.fail(ApiCode.TOKEN_HAS_EXPIRED);
   }
 
   /**
