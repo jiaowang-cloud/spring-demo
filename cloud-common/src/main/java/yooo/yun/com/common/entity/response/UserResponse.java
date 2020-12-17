@@ -11,7 +11,7 @@ import yooo.yun.com.common.entity.BaseEntityResponse;
 import yooo.yun.com.common.entity.pojo.user.UserPoJo;
 
 /**
- * 用户表
+ * 用户信息Response
  *
  * @author WangJiao
  * @since 2019-12-19
@@ -41,6 +41,7 @@ public class UserResponse extends BaseEntityResponse {
 
   public static UserResponse of(UserPoJo poJo) {
     UserResponse response = UserResponse.of();
+    // bean工具类，将一个实体对象属性赋值给另一个实体对象，这两个实体中的属性字段名称和字段类型必须保持一致，否则将拷贝不成功
     BeanUtils.copyProperties(poJo, response);
     return response;
   }

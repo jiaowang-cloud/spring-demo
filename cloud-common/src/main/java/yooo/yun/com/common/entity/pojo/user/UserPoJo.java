@@ -12,7 +12,7 @@ import yooo.yun.com.common.entity.BaseEntity;
 import yooo.yun.com.common.entity.request.UserReq;
 
 /**
- * 用户表
+ * 用户信息
  *
  * @author WangJiao
  * @since 2019-12-19
@@ -49,6 +49,7 @@ public class UserPoJo extends BaseEntity {
 
   public static UserPoJo of(UserReq req) {
     UserPoJo poJo = UserPoJo.of();
+    // bean工具类，将一个实体对象属性赋值给另一个实体对象，这两个实体中的属性字段名称和字段类型必须保持一致，否则将拷贝不成功
     BeanUtils.copyProperties(req, poJo);
     return poJo;
   }

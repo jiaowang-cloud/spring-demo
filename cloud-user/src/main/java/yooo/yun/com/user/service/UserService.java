@@ -29,6 +29,12 @@ public interface UserService extends BaseService<UserPoJo> {
    */
   String login(UserPoJo findUser, String loginType, String openId);
 
+  /**
+   * save userInfo
+   *
+   * @param of user
+   * @return true
+   */
   boolean saveUser(UserPoJo of);
 
   /**

@@ -39,17 +39,18 @@ public class UserController {
   @ApiOperation("注册")
   public ApiResult register(@Valid @RequestBody UserReq req) {
     log.info("register:user register info[req:{}]", JSON.toJSONString(req));
+    // 新增用户条件密码校验判断
     if (!Objects.equals(req.getPassword(), req.getRePassword())) {
       return ApiResult.fail(ApiCode.USER_TWO_PASSWORDS_INCONSISTENT);
     }
+    // 手机号作为账号唯一性校验
     UserPoJo findUser = service.getByTel(req.getTel());
     if (Objects.nonNull(findUser)) {
       return ApiResult.fail(ApiCode.USER_ACCOUNT_REGISTERED);
     }
 
-    // md5加密
+    // 密码进行md5加密
     req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
-    // boolean res = service.save(UserPoJo.of(req));
     boolean res = service.saveUser(UserPoJo.of(req));
     log.info("register:[res:{}]", res);
     return ApiResult.ok(res);
