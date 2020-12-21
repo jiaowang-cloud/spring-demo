@@ -165,4 +165,24 @@ public final class StringUtils {
       }
     }
   }
+
+  public static int[] toCodePoints(CharSequence str) {
+    if (str == null) {
+      return null;
+    } else if (str.length() == 0) {
+      return ArrayUtils.EMPTY_INT_ARRAY;
+    } else {
+      String s = str.toString();
+      int[] result = new int[s.codePointCount(0, s.length())];
+      int index = 0;
+
+      for(int i = 0; i < result.length; ++i) {
+        result[i] = s.codePointAt(index);
+        index += Character.charCount(result[i]);
+      }
+
+      return result;
+    }
+  }
+
 }

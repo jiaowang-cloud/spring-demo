@@ -14,6 +14,7 @@
         <shiro.version>1.4.1</shiro.version>
         <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
     </properties>
     <dependencies>
         <!-- springfox-swagger2 -->
@@ -39,6 +40,12 @@
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
     </dependencies>
 
