@@ -43,7 +43,7 @@ public class ZuulPreFilter extends ZuulFilter {
   @Resource AppConfig appConfig;
   /**
    * PRE_TYPE = "pre：在请求被路由之前调用，可以使用这种过滤器实现身份验证、在集群中选择请求的微服务、记录调试Log等。<br>
-   * ERROR_TYPE = "error"：将请求路由到对应的微服务，用于构建发送给微服务的请求。<br>
+   * ROUTE_TYPE = "route"：将请求路由到对应的微服务，用于构建发送给微服务的请求。<br>
    * POST_TYPE = "post"：在请求被路由到对应的微服务以后执行，可用来为Response添加HTTP Header、将微服务的Response发送给客户端等。<br>
    * ERROR_TYPE = "error"：在其他阶段发生错误时执行该过滤器<br>
    *
