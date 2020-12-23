@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.netflix.zuul.exception.ZuulException;
 import com.netflix.zuul.http.HttpServletRequestWrapper;
 import com.netflix.zuul.http.ServletInputStreamWrapper;
 import lombok.extern.slf4j.Slf4j;
@@ -15,16 +14,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 import yooo.yun.com.common.constant.Constant;
 import yooo.yun.com.common.constant.Constant.HeaderKey;
-import yooo.yun.com.config.AppConfig;
 import yooo.yun.com.common.utils.JWTUtil;
 import yooo.yun.com.common.utils.StringUtils;
+import yooo.yun.com.config.AppConfig;
 import yooo.yun.com.utils.UrlCheckUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.InputStream;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -77,7 +75,7 @@ public class ZuulPreFilter extends ZuulFilter {
   }
 
   @Override
-  public Object run() throws ZuulException {
+  public Object run() {
     RequestContext requestContext = RequestContext.getCurrentContext();
     HttpServletRequest request = requestContext.getRequest();
     log.info("run:[method:{},url:{}]", request.getMethod(), request.getRequestURL());
@@ -86,6 +84,7 @@ public class ZuulPreFilter extends ZuulFilter {
     setHttpServletResponse(requestContext);
 
     if ("OPTIONS".equals(request.getMethod())) {
+      // requestContext.setSendZuulResponse(Boolean.FALSE);告诉Zuul不需要将当前请求转发到后端的服务。
       requestContext.setSendZuulResponse(Boolean.FALSE);
       requestContext.setResponseStatusCode(HttpStatus.NO_CONTENT.value());
       return null;
@@ -105,8 +104,10 @@ public class ZuulPreFilter extends ZuulFilter {
     boolean verified;
     if (StringUtils.isEmpty(token)) {
       log.warn("run:[请求token为空]");
+      // requestContext.setSendZuulResponse(Boolean.FALSE);告诉Zuul不需要将当前请求转发到后端的服务。
       requestContext.setSendZuulResponse(Boolean.FALSE);
       requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
+      // 通过setResponseBody返回数据给客户端
       requestContext.setResponseBody(JSON.toJSONString(getJsonObject()));
       requestContext.getResponse().setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
       return null;
