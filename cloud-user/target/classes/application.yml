@@ -51,21 +51,5 @@ mybatis-plus:
   mapper-locations: classpath*:mapper/**/*Mapper.xml
 ################################ mybatis-plus end ##################################
 
-#################################### Swagger start #################################
-# swagger配置
-swagger:
-  base:
-    package: yooo.yun.com
-  contact:
-    email: jiao.wang@yooo.yun
-    name: wangjiao
-    url: ''
-  description: ''
-  title: spring-demo
-  url: ''
-  version: 1.0
-#################################### Swagger end ###################################
-
-
 
 
