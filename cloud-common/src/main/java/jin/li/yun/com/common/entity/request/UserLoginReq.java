@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
- * 用户表
+ * 用户登录信息请求
  *
  * @author WangJiao
  * @since 2019-12-19

@@ -42,9 +42,12 @@ public class SwaggerConfig implements SwaggerResourcesProvider {
         .filter(s -> !s.equals(applicationName))
         .forEach(
             name -> {
-                log.info("get:服务实例名称[names:{}]", name);
+              log.info("get:服务实例名称[names:{}]", name);
+              // 服务实例名是cloud-user,配置的实例名：spring.application.name: cloud-user
+              // 配置的服务uri: server.servlet.context-path: /user
+              // 我们的服务uri是去掉‘cloud-’的，
+              // 例如：http://localhost:5070/user/mini/user/auth-token，所以要去除前缀的‘cloud-’
               String[] names = name.split(Constant.DEFAULT_STRING_SHORT_LINE);
-
               if (names.length == 2) {
                 name = names[1];
                 log.info("get:服务实例名称取后缀[name:{}]", name);
@@ -54,7 +57,8 @@ public class SwaggerConfig implements SwaggerResourcesProvider {
               if (instanceOptional.isPresent()
                   && instanceOptional.get().getMetadata().containsKey("context-path")) {
                 String contextPath = instanceOptional.get().getMetadata().get("context-path");
-                  log.info("get:context-path[contextPath:{}]", contextPath);
+                log.info("get:context-path[contextPath:{}]", contextPath);
+                // yml配置文件中配置了 server.servlet.context-path: /user，走下面逻辑
                 resources.add(
                     swaggerResource(name, "/" + name + contextPath + "/v2/api-docs", "2.0"));
               } else {

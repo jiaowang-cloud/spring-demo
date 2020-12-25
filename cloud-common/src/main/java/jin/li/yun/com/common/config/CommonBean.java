@@ -50,7 +50,7 @@ public class CommonBean {
         .apiInfo(apiInfo())
         .enable(enableSwagger)
         .select()
-        .apis(RequestHandlerSelectors.basePackage("yooo.yun.com"))
+        .apis(RequestHandlerSelectors.basePackage("jin.li.yun.com"))
         .paths(PathSelectors.any())
         .build()
         .globalOperationParameters(pars);
