@@ -1,15 +1,15 @@
 package jin.li.yun.com.user.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import jin.li.yun.com.user.service.UserService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import jin.li.yun.com.common.entity.enums.UserRoleEnum;
 import jin.li.yun.com.common.entity.pojo.user.UserPoJo;
 import jin.li.yun.com.common.service.Impl.BaseServiceImpl;
 import jin.li.yun.com.common.utils.JWTUtil;
 import jin.li.yun.com.user.mapper.UserMapper;
+import jin.li.yun.com.user.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
