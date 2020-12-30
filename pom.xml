@@ -5,16 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>jin.li.yun.com</groupId>
-    <artifactId>sping-demo</artifactId>
+    <artifactId>spring-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>cloud-user</module>
         <module>cloud-eureka</module>
-        <module>cloud-order</module>
         <module>cloud-gateway</module>
         <module>cloud-common</module>
+        <module>cloud-base</module>
     </modules>
-    <name>cloud-demo</name>
+    <name>spring-demo</name>
     <packaging>pom</packaging>
 
     <!--Spring Boot配置 -->
