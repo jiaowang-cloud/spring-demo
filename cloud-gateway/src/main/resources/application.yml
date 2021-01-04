@@ -37,7 +37,7 @@ zuul:
       sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
       ignoredPatterns: /user/test**
 
-  white-pattern: /user/inner/**,/order/inner/**
+#  white-pattern: /user/inner/**,/order/inner/**
 
   retryable: false    # true:开启重试机制, false:关闭重试机制
 

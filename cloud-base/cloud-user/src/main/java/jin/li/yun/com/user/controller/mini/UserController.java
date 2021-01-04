@@ -15,6 +15,7 @@ import jin.li.yun.com.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -63,7 +64,7 @@ public class UserController {
    */
   @GetMapping("/detail")
   @ApiOperation("获取用户详情")
-  public ApiResult detail(@RequestParam(Constant.HeaderKey.OPEN_ID) String openId) {
+  public ApiResult detail(@ApiIgnore @RequestParam(Constant.HeaderKey.OPEN_ID) String openId) {
     log.info("detail:[openId:{}]", openId);
     UserPoJo findUser = service.getByOpenId(openId);
 
@@ -78,10 +79,10 @@ public class UserController {
    * @param userId userId
    * @return res
    */
-  @GetMapping("/detail")
+  @GetMapping("/order-list")
   @ApiOperation("获取用户订单列表")
-  public ApiResult orderList(@RequestParam(Constant.HeaderKey.USER_ID) long userId) {
+  public ApiResult orderList(@ApiIgnore @RequestParam(Constant.HeaderKey.USER_ID) long userId) {
     log.info("orderList:[userId:{}]", userId);
-    return ApiResult.ok(orderApiService.listByUserId(userId));
+    return orderApiService.listByUserId(userId);
   }
 }
