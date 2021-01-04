@@ -12,6 +12,7 @@
         <module>cloud-gateway</module>
         <module>cloud-common</module>
         <module>cloud-base</module>
+        <module>cloud-base-api</module>
     </modules>
     <name>spring-demo</name>
     <packaging>pom</packaging>

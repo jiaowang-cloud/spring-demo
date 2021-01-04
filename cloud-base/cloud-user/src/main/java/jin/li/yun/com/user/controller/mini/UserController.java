@@ -2,9 +2,6 @@ package jin.li.yun.com.user.controller.mini;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.*;
 import jin.li.yun.com.common.api.ApiCode;
 import jin.li.yun.com.common.api.ApiResult;
 import jin.li.yun.com.common.constant.Constant;
@@ -13,7 +10,11 @@ import jin.li.yun.com.common.entity.pojo.user.UserPoJo;
 import jin.li.yun.com.common.entity.request.UserLoginReq;
 import jin.li.yun.com.common.entity.response.UserResponse;
 import jin.li.yun.com.common.utils.UUIDUtil;
+import jin.li.yun.com.order.service.OrderApiService;
 import jin.li.yun.com.user.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.DigestUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -29,6 +30,7 @@ import java.util.Objects;
 @Api("MINI 用户API")
 public class UserController {
   @Resource private UserService service;
+  @Resource private OrderApiService orderApiService;
 
   /**
    * 用户登录
@@ -68,5 +70,18 @@ public class UserController {
     return Objects.nonNull(findUser)
         ? ApiResult.ok(UserResponse.of(findUser))
         : ApiResult.fail(ApiCode.USER_UNAUTHORIZED);
+  }
+
+  /**
+   * 获取用户订单列表
+   *
+   * @param userId userId
+   * @return res
+   */
+  @GetMapping("/detail")
+  @ApiOperation("获取用户订单列表")
+  public ApiResult orderList(@RequestParam(Constant.HeaderKey.USER_ID) long userId) {
+    log.info("orderList:[userId:{}]", userId);
+    return ApiResult.ok(orderApiService.listByUserId(userId));
   }
 }

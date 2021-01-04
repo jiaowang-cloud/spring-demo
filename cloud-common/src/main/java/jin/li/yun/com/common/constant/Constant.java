@@ -221,7 +221,7 @@ public class Constant {
     public static final String CLOUD_ORDER = "cloud-order";
 
     /** The constant CLOUD_USER. */
-    public static final String CLOUD_USER = "cloud-iot";
+    public static final String CLOUD_USER = "cloud-user";
 
     /** The constant NAME_MAP. */
     public static Map<String, String> NAME_MAP = new HashMap<>();
