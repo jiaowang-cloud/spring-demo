@@ -81,11 +81,11 @@
 
   <!-- 不同环境的日志级别配置 -->
   <springProfile name="local">
-    <logger name="yooo.yun.com" level="DEBUG"/>
+    <logger name="jin.li.yun.com" level="DEBUG"/>
   </springProfile>
 
   <springProfile name="prod">
-    <logger name="yooo.yun.com" level="DEBUG"/>
+    <logger name="jin.li.yun.com" level="DEBUG"/>
   </springProfile>
 
   <!-- 解决SpringBootAdmin错误日志问题 -->
