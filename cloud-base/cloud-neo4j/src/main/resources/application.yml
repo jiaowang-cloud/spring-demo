@@ -1,0 +1,39 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /neo4j
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka
+
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+############################### mysql start #################################
+spring:
+  application:
+    name: cloud-neo4j
+  freemarker:
+    enabled: false
+  thymeleaf:
+    cache: false
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/cloud_user?characterEncoding=utf8&generateSimpleParameterMetadata=true&connectTimeout=5000&useSSL=false
+    username: root
+    password: 123456
+#这一段是连接本地neo4j的代码
+  data:
+    neo4j:
+      uri: bolt://localhost:7687
+      username: neo4j
+      password: 123456
+
+# logback.xml中有详细的日志配置
+logging:
+  config: classpath:logback.xml
+
+
+
+
