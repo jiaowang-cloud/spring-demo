@@ -3,6 +3,7 @@ package jin.li.yun.com.user.controller.saas;
 import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import jin.li.yun.com.common.entity.request.ContractTypeLabelUpdRequest;
 import jin.li.yun.com.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.DigestUtils;

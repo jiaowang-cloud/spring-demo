@@ -1,0 +1,64 @@
+server:
+  port: 7070
+  servlet:
+    context-path: /producer
+#
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8080/eureka
+#
+#  instance:
+#    prefer-ip-address: true
+#    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+############################### mysql start #################################
+spring:
+  application:
+    name: mq-producer
+  freemarker:
+    enabled: false
+  thymeleaf:
+    cache: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/cloud_user?characterEncoding=utf8&generateSimpleParameterMetadata=true&connectTimeout=5000&useSSL=false
+    username: root
+    password: root123
+  ############################### mysql end #################################
+
+  ############################### rabbitmq start #################################
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: mqdev
+    password: mqdev123
+    virtual-host: cloudVirtualHosts
+    # 开启confirm确认机制
+    publisher-confirms: true
+    # 开启return确认机制
+    publisher-returns: true
+    template:
+      receive-timeout: 60000
+      reply-timeout: 1000000000
+      # 设置为true后，消费者在消息没有被路由到合适队列情况下会被return监听，而不会自动删除
+      mandatory: true
+    listener:
+      simple:
+        # 设置消费端手动 ack
+        acknowledge-mode: manual
+        # 消费者最小数量
+        concurrency: 1
+        # 消费者最大数量
+        max-concurrency: 20
+        # 每次只处理一个消息
+        prefetch: 1
+        retry:
+          # 是否支持重试
+          enabled: true
+############################### rabbitmq end #################################
+
+# logback.xml中有详细的日志配置
+logging:
+  config: classpath:logback.xml
+
+
+

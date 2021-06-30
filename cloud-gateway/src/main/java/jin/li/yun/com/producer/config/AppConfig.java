@@ -1,4 +1,4 @@
-package jin.li.yun.com.config;
+package jin.li.yun.com.producer.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

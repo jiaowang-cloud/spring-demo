@@ -215,6 +215,33 @@ public class Constant {
     public static final String OPEN_ID = "openId";
   }
 
+  public static class RabbitMq {
+    /** 消息过期时间 单位ms */
+    public static final long MSG_EXPIRATION_TIME = 10000;
+    /** 交换机 */
+    public static final String EXCHANGE_REQUEST_SMS = "exchange_request_sms";
+    /** 死信交换机 */
+    public static final String EXCHANGE_DEAD_LETTER = "exchange_dead_letter";
+
+    /** Reply交换机 */
+    public static final String EXCHANGE_REPLY_SMS = "exchange_reply_sms";
+
+    /** 短信队列 */
+    public static final String TOPIC_SMS_QUEUE = "topic_sms_queue";
+
+    /** Reply 邮件队列 */
+    public static final String TOPIC_EMAIL_QUEUE = "topic_email_queue";
+
+    /** 死信队列 */
+    public static final String DEAD_LETTER_QUEUE = "dead_letter_queue";
+
+    /** 声明路由键常量 "inform.#.email.#"; *：匹配不多不少一个词 #：匹配一个或多个词 */
+    public static final String ROUTING_KEY_EMAIL = "inform.#.email.#";
+
+    public static final String ROUTING_KEY_SMS = "inform.#.sms.#";
+    public static final String ROUTING_KEY_DEAD = "inform.#.dead.#";
+  }
+
   /** 请求头key */
   public static class ServerName {
     /** The constant CLOUD_ORDER. */

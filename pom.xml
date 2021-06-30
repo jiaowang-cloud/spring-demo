@@ -13,6 +13,7 @@
         <module>cloud-common</module>
         <module>cloud-base</module>
         <module>cloud-base-api</module>
+        <module>cloud-mq</module>
     </modules>
     <name>spring-demo</name>
     <packaging>pom</packaging>

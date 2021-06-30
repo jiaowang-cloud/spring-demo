@@ -1,0 +1,43 @@
+server:
+  port: 7071
+  servlet:
+    context-path: /consumer
+#
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8080/eureka
+#
+#  instance:
+#    prefer-ip-address: true
+#    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+############################### mysql start #################################
+spring:
+  application:
+    name: mq-consumer
+  freemarker:
+    enabled: false
+  thymeleaf:
+    cache: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/cloud_user?characterEncoding=utf8&generateSimpleParameterMetadata=true&connectTimeout=5000&useSSL=false
+    username: root
+    password: root123
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: mqdev
+    password: mqdev123
+    virtual-host: cloudVirtualHosts
+    template:
+      receive-timeout: 60000
+      reply-timeout: 1000000000
+
+############################### mysql end #################################
+# logback.xml中有详细的日志配置
+logging:
+  config: classpath:logback.xml
+
+
+

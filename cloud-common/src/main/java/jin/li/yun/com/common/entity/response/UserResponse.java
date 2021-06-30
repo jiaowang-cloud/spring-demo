@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.springframework.beans.BeanUtils;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.beans.BeanUtils;
  * @author WangJiao
  * @since 2019-12-19
  */
+@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor

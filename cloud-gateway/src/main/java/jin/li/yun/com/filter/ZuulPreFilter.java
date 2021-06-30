@@ -6,7 +6,7 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.http.HttpServletRequestWrapper;
 import com.netflix.zuul.http.ServletInputStreamWrapper;
-import jin.li.yun.com.config.AppConfig;
+import jin.li.yun.com.producer.config.AppConfig;
 import jin.li.yun.com.utils.UrlCheckUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
