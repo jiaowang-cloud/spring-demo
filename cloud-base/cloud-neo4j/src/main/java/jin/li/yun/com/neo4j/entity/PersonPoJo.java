@@ -1,4 +1,4 @@
-package jin.li.yun.com.common.entity.pojo.neo4j;
+package jin.li.yun.com.neo4j.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -21,7 +21,7 @@ import org.neo4j.ogm.annotation.Property;
 @NoArgsConstructor
 @ApiModel("Person")
 @NodeEntity(label = "Person")
-public class PersonPoJo{
+public class PersonPoJo {
 
   @ApiModelProperty(value = "id", example = "234")
   @Id

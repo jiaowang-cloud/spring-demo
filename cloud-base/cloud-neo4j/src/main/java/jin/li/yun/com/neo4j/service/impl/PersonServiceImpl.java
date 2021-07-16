@@ -1,6 +1,6 @@
 package jin.li.yun.com.neo4j.service.impl;
 
-import jin.li.yun.com.common.entity.pojo.neo4j.PersonPoJo;
+import jin.li.yun.com.neo4j.entity.PersonPoJo;
 import jin.li.yun.com.neo4j.repository.PersonRepository;
 import jin.li.yun.com.neo4j.service.PersonService;
 import lombok.extern.slf4j.Slf4j;

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.springframework.beans.BeanUtils;
 import jin.li.yun.com.common.entity.BaseEntity;
 import jin.li.yun.com.common.entity.request.UserReq;
@@ -17,6 +18,7 @@ import jin.li.yun.com.common.entity.request.UserReq;
  * @author WangJiao
  * @since 2019-12-19
  */
+@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor

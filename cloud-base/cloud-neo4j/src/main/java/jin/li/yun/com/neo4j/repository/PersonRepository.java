@@ -1,6 +1,6 @@
 package jin.li.yun.com.neo4j.repository;
 
-import jin.li.yun.com.common.entity.pojo.neo4j.PersonPoJo;
+import jin.li.yun.com.neo4j.entity.PersonPoJo;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 

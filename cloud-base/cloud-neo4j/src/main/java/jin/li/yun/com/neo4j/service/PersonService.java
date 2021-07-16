@@ -1,8 +1,6 @@
 package jin.li.yun.com.neo4j.service;
 
-import jin.li.yun.com.common.entity.pojo.neo4j.PersonPoJo;
-import jin.li.yun.com.common.entity.pojo.user.UserPoJo;
-import jin.li.yun.com.common.service.BaseService;
+import jin.li.yun.com.neo4j.entity.PersonPoJo;
 
 import java.util.List;
 
