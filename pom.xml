@@ -14,6 +14,7 @@
         <module>cloud-base</module>
         <module>cloud-base-api</module>
         <module>cloud-mq</module>
+        <module>cloud-security</module>
     </modules>
     <name>spring-demo</name>
     <packaging>pom</packaging>
@@ -191,7 +192,7 @@
                 <configuration>
                     <imageName>${project.name}</imageName>
                     <dockerDirectory>${project.name}/src/main/docker</dockerDirectory>
-                    <dockerHost>${docker.host}</dockerHost>
+<!--                    <dockerHost>${docker.host}</dockerHost>-->
                     <skipDockerBuild>true</skipDockerBuild>
                     <resources>
                         <resource>
