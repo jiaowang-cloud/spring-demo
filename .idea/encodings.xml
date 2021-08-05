@@ -2,6 +2,8 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/cloud-base-api/cloud-order-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-base/cloud-material/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-base/cloud-material/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-base/cloud-neo4j/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-base/cloud-order/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-base/cloud-user/src/main/java" charset="UTF-8" />

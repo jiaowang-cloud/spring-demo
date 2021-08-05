@@ -15,8 +15,28 @@
         <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
         <commons-lang3.version>3.9</commons-lang3.version>
+        <minio.version>8.0.3</minio.version>
+        <commons-io.version>2.6</commons-io.version>
+        <commons-fileupload.version>1.4</commons-fileupload.version>
     </properties>
     <dependencies>
+        <!-- minio依赖-->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>${minio.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons-fileupload.version}</version>
+        </dependency>
+
         <!-- springfox-swagger2 -->
         <dependency>
             <groupId>io.springfox</groupId>

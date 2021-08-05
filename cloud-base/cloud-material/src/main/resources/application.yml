@@ -1,7 +1,7 @@
 server:
-  port: 5050
+  port: 3030
   servlet:
-    context-path: /user
+    context-path: /material
 
 eureka:
   client:
@@ -14,7 +14,7 @@ eureka:
 ############################### mysql start #################################
 spring:
   application:
-    name: cloud-user
+    name: cloud-material
   freemarker:
     enabled: false
   thymeleaf:
