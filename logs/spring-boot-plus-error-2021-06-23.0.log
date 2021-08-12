@@ -1,1 +1,0 @@
-2021-06-23 18:12:40.097 ERROR 24188 [AMQP Connection 127.0.0.1:5672] o.s.a.r.c.CachingConnectionFactory       1349 : Channel shutdown: connection error
