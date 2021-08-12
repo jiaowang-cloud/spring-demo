@@ -23,10 +23,20 @@ spring:
     url: jdbc:mysql://192.168.88.127:3306/cloud_user?characterEncoding=utf8&generateSimpleParameterMetadata=true&connectTimeout=5000&useSSL=false
     username: root
     password: 123456
+
+minio:
+  endpoint: http://192.168.88.127:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucket-name: oss
+  filHost: http://192.168.88.127:9000
 ############################### mysql end #################################
 # logback.xml中有详细的日志配置
 logging:
   config: classpath:logback.xml
+  level:
+    ROOT: info
+    com.minio: debug
 
 ############################### mybatis-plus start #################################
 mybatis-plus:

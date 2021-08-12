@@ -35,3 +35,4 @@ proguard/
 .package-lock.json
 .idea
 LOG_FILE_IS_UNDEFINED
+/.idea/

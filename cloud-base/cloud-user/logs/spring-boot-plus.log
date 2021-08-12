@@ -1,99 +1,207 @@
-2021-07-27 13:56:16.351  INFO   [main] .b.t.c.SpringBootTestContextBootstrapper 308 : Neither @ContextConfiguration nor @ContextHierarchy found for test class [jin.li.yun.com.user.service.UserServiceTest], using SpringBootContextLoader
-2021-07-27 13:56:16.386  INFO   [main] o.s.t.c.support.AbstractContextLoader    264 : Could not detect default resource locations for test class [jin.li.yun.com.user.service.UserServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-2021-07-27 13:56:16.390  INFO   [main] t.c.s.AnnotationConfigContextLoaderUtils 83 : Could not detect default configuration classes for test class [jin.li.yun.com.user.service.UserServiceTest]: UserServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2021-07-27 13:56:16.809  INFO   [main] .b.t.c.SpringBootTestContextBootstrapper 247 : Found @SpringBootConfiguration jin.li.yun.com.UserApplication for test class jin.li.yun.com.user.service.UserServiceTest
-2021-07-27 13:56:17.193  INFO   [main] .b.t.c.SpringBootTestContextBootstrapper 248 : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-2021-07-27 13:56:17.249  INFO   [main] .b.t.c.SpringBootTestContextBootstrapper 177 : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1bc27f5, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1b759d6, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@18d604b, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@7cd6cc, org.springframework.test.context.support.DirtiesContextTestExecutionListener@c9d179, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1554c5f, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1faea86, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@1888343, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@1ecda92, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@fc5f04, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@2829c7, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@1eb2dda]
-2021-07-27 13:56:22.859  INFO 10444 [main] s.c.a.AnnotationConfigApplicationContext 588 : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@6104fc: startup date [Tue Jul 27 13:56:22 CST 2021]; root of context hierarchy
-2021-07-27 13:56:23.382  INFO 10444 [main] f.a.AutowiredAnnotationBeanPostProcessor 153 : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2021-07-27 13:56:23.473  INFO 10444 [main] trationDelegate$BeanPostProcessorChecker 326 : Bean 'configurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$c6a9821f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-07-27 13:56:28.892  INFO 10444 [main] j.l.y.com.user.service.UserServiceTest   654 : No active profile set, falling back to default profiles: default
-2021-07-27 13:56:28.909  INFO 10444 [main] o.s.w.c.s.GenericWebApplicationContext   588 : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1307458: startup date [Tue Jul 27 13:56:28 CST 2021]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@6104fc
-2021-07-27 13:56:33.757  INFO 10444 [main] o.s.b.f.s.DefaultListableBeanFactory     821 : Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=refresh; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=false; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]] with [Root bean: class [org.springframework.aop.scope.ScopedProxyFactoryBean]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in BeanDefinition defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]]
-2021-07-27 13:56:34.482  INFO 10444 [main] o.s.cloud.context.scope.GenericScope     294 : BeanFactory id=af643660-1174-3913-bce0-f0c5d17b7d77
-2021-07-27 13:56:34.852  INFO 10444 [main] f.a.AutowiredAnnotationBeanPostProcessor 153 : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2021-07-27 13:56:35.594  INFO 10444 [main] trationDelegate$BeanPostProcessorChecker 326 : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$aa8f7f22] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-07-27 13:56:35.770  INFO 10444 [main] trationDelegate$BeanPostProcessorChecker 326 : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$c6a9821f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-07-27 13:56:37.029  WARN 10444 [main] c.n.c.sources.URLConfigurationSource     121 : No URLs will be polled as dynamic configuration sources.
-2021-07-27 13:56:37.035  INFO 10444 [main] c.n.c.sources.URLConfigurationSource     122 : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-27 13:56:37.134  INFO 10444 [main] c.netflix.config.DynamicPropertyFactory  281 : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@1bd7107
-2021-07-27 13:56:40.421  INFO 10444 [main] s.c.a.AnnotationConfigApplicationContext 588 : Refreshing FeignContext-cloud-order: startup date [Tue Jul 27 13:56:40 CST 2021]; parent: org.springframework.web.context.support.GenericWebApplicationContext@1307458
-2021-07-27 13:56:40.525  INFO 10444 [main] f.a.AutowiredAnnotationBeanPostProcessor 153 : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2021-07-27 13:56:42.399  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerMapping 550 : Mapped "{[/mini/user/detail],methods=[GET]}" onto public jin.li.yun.com.common.api.ApiResult jin.li.yun.com.user.controller.mini.UserController.detail(java.lang.String)
-2021-07-27 13:56:42.405  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerMapping 550 : Mapped "{[/mini/user/auth-token],methods=[POST]}" onto public jin.li.yun.com.common.api.ApiResult jin.li.yun.com.user.controller.mini.UserController.authToken(jin.li.yun.com.common.entity.request.UserLoginReq)
-2021-07-27 13:56:42.407  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerMapping 550 : Mapped "{[/mini/user/order-list],methods=[GET]}" onto public jin.li.yun.com.common.api.ApiResult jin.li.yun.com.user.controller.mini.UserController.orderList(long)
-2021-07-27 13:56:42.422  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerMapping 550 : Mapped "{[/saas/user/register],methods=[POST]}" onto public jin.li.yun.com.common.api.ApiResult jin.li.yun.com.user.controller.saas.UserController.register(jin.li.yun.com.common.entity.request.UserReq)
-2021-07-27 13:56:42.424  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerMapping 550 : Mapped "{[/saas/user/delete/{id}],methods=[DELETE]}" onto public jin.li.yun.com.common.api.ApiResult jin.li.yun.com.user.controller.saas.UserController.delete(long)
-2021-07-27 13:56:42.426  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerMapping 550 : Mapped "{[/saas/user/{id}],methods=[GET]}" onto public jin.li.yun.com.common.api.ApiResult jin.li.yun.com.user.controller.saas.UserController.detail(long)
-2021-07-27 13:56:42.428  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerMapping 550 : Mapped "{[/saas/user/login],methods=[POST]}" onto public jin.li.yun.com.common.api.ApiResult jin.li.yun.com.user.controller.saas.UserController.login(jin.li.yun.com.common.entity.request.UserLoginReq)
-2021-07-27 13:56:42.430  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerMapping 550 : Mapped "{[/saas/user/test],methods=[POST]}" onto public jin.li.yun.com.common.api.ApiResult jin.li.yun.com.user.controller.saas.UserController.testGlobalException(int)
-2021-07-27 13:56:42.433  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerMapping 550 : Mapped "{[/saas/user/test-api],methods=[POST]}" onto public jin.li.yun.com.common.api.ApiResult jin.li.yun.com.user.controller.saas.UserController.testApiResult(int)
-2021-07-27 13:56:42.436  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerMapping 550 : Mapped "{[/error]}" onto public jin.li.yun.com.common.api.ApiResult jin.li.yun.com.common.exception.GlobalErrorController.handleError(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
-2021-07-27 13:56:42.454  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerMapping 550 : Mapped "{[/swagger-resources/configuration/ui]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
-2021-07-27 13:56:42.458  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerMapping 550 : Mapped "{[/swagger-resources]}" onto public org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
-2021-07-27 13:56:42.460  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerMapping 550 : Mapped "{[/swagger-resources/configuration/security]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
-2021-07-27 13:56:47.785  INFO 10444 [main] o.s.cloud.commons.util.InetUtils         170 : Cannot determine local hostname
-2021-07-27 13:56:51.944  INFO 10444 [main] o.s.cloud.commons.util.InetUtils         170 : Cannot determine local hostname
-2021-07-27 13:56:52.898  INFO 10444 [main] o.s.b.a.e.web.EndpointLinksResolver      59 : Exposing 2 endpoint(s) beneath base path '/actuator'
-2021-07-27 13:56:52.979  INFO 10444 [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping 550 : Mapped "{[/actuator/health],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
-2021-07-27 13:56:52.982  INFO 10444 [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping 550 : Mapped "{[/actuator/info],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
-2021-07-27 13:56:52.988  INFO 10444 [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping 550 : Mapped "{[/actuator],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto protected java.util.Map<java.lang.String, java.util.Map<java.lang.String, org.springframework.boot.actuate.endpoint.web.Link>> org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping.links(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
-2021-07-27 13:56:55.308  INFO 10444 [main] pertySourcedRequestMappingHandlerMapping 69 : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
-2021-07-27 13:56:56.811  WARN 10444 [main] c.n.c.sources.URLConfigurationSource     121 : No URLs will be polled as dynamic configuration sources.
-2021-07-27 13:56:56.812  INFO 10444 [main] c.n.c.sources.URLConfigurationSource     122 : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-27 13:56:57.192  INFO 10444 [main] o.s.w.s.handler.SimpleUrlHandlerMapping  373 : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
-2021-07-27 13:56:58.100  INFO 10444 [main] s.w.s.m.m.a.RequestMappingHandlerAdapter 588 : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@1307458: startup date [Tue Jul 27 13:56:28 CST 2021]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@6104fc
-2021-07-27 13:56:58.376  INFO 10444 [main] o.s.w.s.handler.SimpleUrlHandlerMapping  373 : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
-2021-07-27 13:56:58.378  INFO 10444 [main] o.s.w.s.handler.SimpleUrlHandlerMapping  373 : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
-2021-07-27 13:56:58.454  INFO 10444 [main] .m.m.a.ExceptionHandlerExceptionResolver 288 : Detected @ExceptionHandler methods in globalExceptionHandler
-2021-07-27 13:57:01.248  INFO 10444 [main] o.s.c.support.DefaultLifecycleProcessor  356 : Starting beans in phase 0
-2021-07-27 13:57:01.271  INFO 10444 [main] o.s.c.support.DefaultLifecycleProcessor  356 : Starting beans in phase 2147483647
-2021-07-27 13:57:01.272  INFO 10444 [main] d.s.w.p.DocumentationPluginsBootstrapper 160 : Context refreshed
-2021-07-27 13:57:01.381  INFO 10444 [main] d.s.w.p.DocumentationPluginsBootstrapper 163 : Found 1 custom documentation plugin(s)
-2021-07-27 13:57:01.509  INFO 10444 [main] s.d.s.w.s.ApiListingReferenceScanner     41 : Scanning for api listing references
-2021-07-27 13:57:02.171  INFO 10444 [main] .d.s.w.r.o.CachingOperationNameGenerator 40 : Generating unique operation named: detailUsingGET_1
-2021-07-27 13:57:02.286  INFO 10444 [main] j.l.y.com.user.service.UserServiceTest   59 : Started UserServiceTest in 44.932 seconds (JVM running for 55.461)
-2021-07-27 13:57:02.749  INFO 10444 [main] com.zaxxer.hikari.HikariDataSource       110 : HikariPool-1 - Starting...
-2021-07-27 13:57:03.761  INFO 10444 [main] com.zaxxer.hikari.HikariDataSource       123 : HikariPool-1 - Start completed.
-2021-07-27 13:57:03.954  INFO 10444 [main] j.l.y.c.c.utils.SnowflakeIdWorkerUtil    92 : getWorkId:本地ip地址[hostAddress:169.254.205.106]
-2021-07-27 13:57:03.968  INFO 10444 [main] j.l.y.c.c.utils.SnowflakeIdWorkerUtil    115 : getDataCenterId:[hostName:DESKTOP-F950UG4]
-2021-07-27 13:57:03.969  INFO 10444 [main] j.l.y.c.c.utils.SnowflakeIdWorkerUtil    68 : SnowflakeIdWorkerUtil:[workerId:10,dataCenterId:7]
-2021-07-27 13:57:04.215  INFO 10444 [main] j.l.y.c.u.service.impl.UserServiceImpl   51 : saveUser:[save:true]
-2021-07-27 13:57:04.896  INFO 10444 [Thread-13] o.s.w.c.s.GenericWebApplicationContext   991 : Closing org.springframework.web.context.support.GenericWebApplicationContext@1307458: startup date [Tue Jul 27 13:56:28 CST 2021]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@6104fc
-2021-07-27 13:57:04.925  INFO 10444 [Thread-13] o.s.c.n.eureka.InstanceInfoFactory       71 : Setting initial instance status as: STARTING
-2021-07-27 13:57:04.935  INFO 10444 [Thread-13] o.s.c.n.e.s.EurekaServiceRegistry        65 : Unregistering application CLOUD-USER with eureka with status DOWN
-2021-07-27 13:57:04.940  INFO 10444 [Thread-13] o.s.c.support.DefaultLifecycleProcessor  369 : Stopping beans in phase 2147483647
-2021-07-27 13:57:04.941  INFO 10444 [Thread-13] o.s.c.support.DefaultLifecycleProcessor  369 : Stopping beans in phase 0
-2021-07-27 13:57:04.957  INFO 10444 [Thread-13] s.c.a.AnnotationConfigApplicationContext 991 : Closing FeignContext-cloud-order: startup date [Tue Jul 27 13:56:40 CST 2021]; parent: org.springframework.web.context.support.GenericWebApplicationContext@1307458
-2021-07-27 13:57:04.965  WARN 10444 [Thread-13] s.c.a.AnnotationConfigApplicationContext 1001 : Exception thrown from ApplicationListener handling ContextClosedEvent
+2021-08-05 15:17:29.981  INFO   [main] .b.t.c.SpringBootTestContextBootstrapper 308 : Neither @ContextConfiguration nor @ContextHierarchy found for test class [jin.li.yun.com.user.service.UserServiceTest], using SpringBootContextLoader
+2021-08-05 15:17:30.011  INFO   [main] o.s.t.c.support.AbstractContextLoader    264 : Could not detect default resource locations for test class [jin.li.yun.com.user.service.UserServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2021-08-05 15:17:30.014  INFO   [main] t.c.s.AnnotationConfigContextLoaderUtils 83 : Could not detect default configuration classes for test class [jin.li.yun.com.user.service.UserServiceTest]: UserServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2021-08-05 15:17:30.401  INFO   [main] .b.t.c.SpringBootTestContextBootstrapper 247 : Found @SpringBootConfiguration jin.li.yun.com.UserApplication for test class jin.li.yun.com.user.service.UserServiceTest
+2021-08-05 15:17:30.918  INFO   [main] .b.t.c.SpringBootTestContextBootstrapper 248 : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2021-08-05 15:17:30.975  INFO   [main] .b.t.c.SpringBootTestContextBootstrapper 177 : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@c9d179, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1554c5f, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@1faea86, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1888343, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1ecda92, org.springframework.test.context.transaction.TransactionalTestExecutionListener@fc5f04, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@2829c7, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@1eb2dda, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@8658ff, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@742ed4, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@13d4a8c, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@1de24cc]
+2021-08-05 15:17:35.394  INFO 12812 [main] s.c.a.AnnotationConfigApplicationContext 588 : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@164ca4c: startup date [Thu Aug 05 15:17:35 CST 2021]; root of context hierarchy
+2021-08-05 15:17:35.956  INFO 12812 [main] f.a.AutowiredAnnotationBeanPostProcessor 153 : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-08-05 15:17:36.070  INFO 12812 [main] trationDelegate$BeanPostProcessorChecker 326 : Bean 'configurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$929b2fb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-08-05 15:17:40.376  INFO 12812 [main] j.l.y.com.user.service.UserServiceTest   654 : No active profile set, falling back to default profiles: default
+2021-08-05 15:17:40.387  INFO 12812 [main] o.s.w.c.s.GenericWebApplicationContext   588 : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1617539: startup date [Thu Aug 05 15:17:40 CST 2021]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@164ca4c
+2021-08-05 15:17:43.011  INFO 12812 [main] o.s.b.f.s.DefaultListableBeanFactory     821 : Overriding bean definition for bean 'dataSource' with a different definition: replacing [Root bean: class [null]; scope=refresh; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=false; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari; factoryMethodName=dataSource; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]] with [Root bean: class [org.springframework.aop.scope.ScopedProxyFactoryBean]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in BeanDefinition defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]]
+2021-08-05 15:17:43.385  INFO 12812 [main] o.s.cloud.context.scope.GenericScope     294 : BeanFactory id=98263bb6-c0e3-3400-baf2-531c34ec50a4
+2021-08-05 15:17:43.527  INFO 12812 [main] f.a.AutowiredAnnotationBeanPostProcessor 153 : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-08-05 15:17:43.733  INFO 12812 [main] trationDelegate$BeanPostProcessorChecker 326 : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ed0faffe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-08-05 15:17:43.887  INFO 12812 [main] trationDelegate$BeanPostProcessorChecker 326 : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$929b2fb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-08-05 15:17:44.711  WARN 12812 [main] c.n.c.sources.URLConfigurationSource     121 : No URLs will be polled as dynamic configuration sources.
+2021-08-05 15:17:44.711  INFO 12812 [main] c.n.c.sources.URLConfigurationSource     122 : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-08-05 15:17:44.746  INFO 12812 [main] c.netflix.config.DynamicPropertyFactory  281 : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@15113de
+2021-08-05 15:17:46.448  INFO 12812 [main] s.c.a.AnnotationConfigApplicationContext 588 : Refreshing FeignContext-cloud-order: startup date [Thu Aug 05 15:17:46 CST 2021]; parent: org.springframework.web.context.support.GenericWebApplicationContext@1617539
+2021-08-05 15:17:46.489  INFO 12812 [main] f.a.AutowiredAnnotationBeanPostProcessor 153 : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2021-08-05 15:17:47.318  WARN 12812 [main] o.s.w.c.s.GenericWebApplicationContext   556 : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'minioUtil': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'minioClient' defined in class path resource [jin/li/yun/com/common/config/MinioConfig.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [io.minio.MinioClient]: Factory method 'minioClient' threw exception; nested exception is java.lang.IllegalArgumentException: endpoint must not be null.
+2021-08-05 15:17:47.321  INFO 12812 [main] s.c.a.AnnotationConfigApplicationContext 991 : Closing FeignContext-cloud-order: startup date [Thu Aug 05 15:17:46 CST 2021]; parent: org.springframework.web.context.support.GenericWebApplicationContext@1617539
+2021-08-05 15:17:47.350  INFO 12812 [main] ConditionEvaluationReportLoggingListener 142 : 
 
-org.springframework.beans.factory.BeanCreationNotAllowedException: Error creating bean with name 'eurekaAutoServiceRegistration': Singleton bean creation not allowed while singletons of this factory are in destruction (Do not request a bean from a BeanFactory in a destroy method implementation!)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:208)
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-08-05 15:17:47.358 ERROR 12812 [main] o.s.boot.SpringApplication               837 : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'minioUtil': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'minioClient' defined in class path resource [jin/li/yun/com/common/config/MinioConfig.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [io.minio.MinioClient]: Factory method 'minioClient' threw exception; nested exception is java.lang.IllegalArgumentException: endpoint must not be null.
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:321)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1336)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:572)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1087)
-	at org.springframework.context.event.ApplicationListenerMethodAdapter.getTargetBean(ApplicationListenerMethodAdapter.java:288)
-	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:258)
-	at org.springframework.context.event.ApplicationListenerMethodAdapter.processEvent(ApplicationListenerMethodAdapter.java:180)
-	at org.springframework.context.event.ApplicationListenerMethodAdapter.onApplicationEvent(ApplicationListenerMethodAdapter.java:142)
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
-	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:400)
-	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:406)
-	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:354)
-	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:998)
-	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:965)
-	at org.springframework.cloud.context.named.NamedContextFactory.destroy(NamedContextFactory.java:76)
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:256)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:571)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:543)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:954)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:504)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:961)
-	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1039)
-	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1015)
-	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:935)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:759)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:548)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:386)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:127)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'minioClient' defined in class path resource [jin/li/yun/com/common/config/MinioConfig.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [io.minio.MinioClient]: Factory method 'minioClient' threw exception; nested exception is java.lang.IllegalArgumentException: endpoint must not be null.
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:591)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1246)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1096)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:535)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:251)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1135)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1062)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:507)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:485)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:619)
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:180)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:90)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:318)
+	... 43 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [io.minio.MinioClient]: Factory method 'minioClient' threw exception; nested exception is java.lang.IllegalArgumentException: endpoint must not be null.
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:583)
+	... 60 common frames omitted
+Caused by: java.lang.IllegalArgumentException: endpoint must not be null.
+	at io.minio.MinioClient$Builder.validateNotNull(MinioClient.java:2741)
+	at io.minio.MinioClient$Builder.validateNotEmptyString(MinioClient.java:2746)
+	at io.minio.MinioClient$Builder.getBaseUrl(MinioClient.java:2790)
+	at io.minio.MinioClient$Builder.endpoint(MinioClient.java:2803)
+	at jin.li.yun.com.common.config.MinioConfig.minioClient(MinioConfig.java:23)
+	at jin.li.yun.com.common.config.MinioConfig$$EnhancerBySpringCGLIB$$91689d99.CGLIB$minioClient$0(<generated>)
+	at jin.li.yun.com.common.config.MinioConfig$$EnhancerBySpringCGLIB$$91689d99$$FastClassBySpringCGLIB$$70581c08.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:365)
+	at jin.li.yun.com.common.config.MinioConfig$$EnhancerBySpringCGLIB$$91689d99.minioClient(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	... 61 common frames omitted
 
-2021-07-27 13:57:04.968  INFO 10444 [Thread-13] com.zaxxer.hikari.HikariDataSource       381 : HikariPool-1 - Shutdown initiated...
-2021-07-27 13:57:04.996  INFO 10444 [Thread-13] com.zaxxer.hikari.HikariDataSource       383 : HikariPool-1 - Shutdown completed.
+2021-08-05 15:17:47.361 ERROR 12812 [main] o.s.test.context.TestContextManager      250 : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@c9d179] to prepare test instance [jin.li.yun.com.user.service.UserServiceTest@df4ab]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'minioUtil': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'minioClient' defined in class path resource [jin/li/yun/com/common/config/MinioConfig.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [io.minio.MinioClient]: Factory method 'minioClient' threw exception; nested exception is java.lang.IllegalArgumentException: endpoint must not be null.
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:321)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1336)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:572)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:759)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:548)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:386)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:127)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+	... 27 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'minioClient' defined in class path resource [jin/li/yun/com/common/config/MinioConfig.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [io.minio.MinioClient]: Factory method 'minioClient' threw exception; nested exception is java.lang.IllegalArgumentException: endpoint must not be null.
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:591)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1246)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1096)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:535)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:251)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1135)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1062)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:507)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:485)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:619)
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:180)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:90)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:318)
+	... 43 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [io.minio.MinioClient]: Factory method 'minioClient' threw exception; nested exception is java.lang.IllegalArgumentException: endpoint must not be null.
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:583)
+	... 60 common frames omitted
+Caused by: java.lang.IllegalArgumentException: endpoint must not be null.
+	at io.minio.MinioClient$Builder.validateNotNull(MinioClient.java:2741)
+	at io.minio.MinioClient$Builder.validateNotEmptyString(MinioClient.java:2746)
+	at io.minio.MinioClient$Builder.getBaseUrl(MinioClient.java:2790)
+	at io.minio.MinioClient$Builder.endpoint(MinioClient.java:2803)
+	at jin.li.yun.com.common.config.MinioConfig.minioClient(MinioConfig.java:23)
+	at jin.li.yun.com.common.config.MinioConfig$$EnhancerBySpringCGLIB$$91689d99.CGLIB$minioClient$0(<generated>)
+	at jin.li.yun.com.common.config.MinioConfig$$EnhancerBySpringCGLIB$$91689d99$$FastClassBySpringCGLIB$$70581c08.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:365)
+	at jin.li.yun.com.common.config.MinioConfig$$EnhancerBySpringCGLIB$$91689d99.minioClient(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	... 61 common frames omitted
+
